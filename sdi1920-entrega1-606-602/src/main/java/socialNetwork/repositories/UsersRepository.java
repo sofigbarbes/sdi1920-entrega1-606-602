@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 import socialNetwork.entities.User;
 
 public interface UsersRepository extends CrudRepository<User, Long>{
-	User findByDni(String dni);
+	User findByEmail(String email);
 }
