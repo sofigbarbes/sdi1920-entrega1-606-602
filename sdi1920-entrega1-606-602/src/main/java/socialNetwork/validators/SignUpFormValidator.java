@@ -1,7 +1,4 @@
-package com.socialNetwork.validators;
-
-import java.util.ArrayList;
-import java.util.List;
+package socialNetwork.validators;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -9,13 +6,13 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import com.socialNetwork.entities.User;
-import com.socialNetwork.services.UsersService;
+import socialNetwork.entities.User;
+import socialNetwork.services.UsersService;
 
 @Component
 public class SignUpFormValidator implements Validator {
 	@Autowired
-	private UsersService usersService = new UsersService();
+	private UsersService usersService;
 
 	@Override
 	public boolean supports(Class<?> aClass) {
@@ -25,11 +22,10 @@ public class SignUpFormValidator implements Validator {
 	@Override
 	public void validate(Object target, Errors errors) {
 		User user = (User) target;
-		List<User> users = new ArrayList<User>(usersService.getUsers());
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "dni", "Error.empty");
-//		if (user.getDni().length() < 5 || user.getDni().length() > 24) {
-//			errors.rejectValue("dni", "Error.signup.dni.length");
-//		}
+		if (user.getDni().length() < 5 || user.getDni().length() > 24) {
+			errors.rejectValue("dni", "Error.signup.dni.length");
+		}
 		if (usersService.getUserByDni(user.getDni()) != null) {
 			errors.rejectValue("dni", "Error.signup.dni.duplicate");
 		}
@@ -44,17 +40,6 @@ public class SignUpFormValidator implements Validator {
 		}
 		if (!user.getPasswordConfirm().equals(user.getPassword())) {
 			errors.rejectValue("passwordConfirm", "Error.signup.passwordConfirm.coincidence");
-		}
-		if (!Character.isLetter(user.getDni().charAt(user.getDni().length() - 1))) {
-			errors.rejectValue("dni", "Error.signup.dni.format");
-		}
-		if (user.getDni().length() != 9) {
-			errors.rejectValue("dni", "Error.signup.dni.length");
-		}
-		for (User u : users) {
-			if (u.getDni() == user.getDni()) {
-
-			}
 		}
 	}
 }

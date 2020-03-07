@@ -1,21 +1,25 @@
-package com.socialNetwork.services;
+package socialNetwork.services;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.socialNetwork.entities.User;
-import com.socialNetwork.repositories.UsersRepository;
+import socialNetwork.entities.User;
+import socialNetwork.repositories.UsersRepository;
+
 
 @Service
 public class UsersService {
 	@Autowired
 	private UsersRepository usersRepository;
+
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@PostConstruct
 	public void init() {
@@ -32,7 +36,7 @@ public class UsersService {
 	}
 
 	public void addUser(User user) {
-		user.setPassword((user.getPassword()));
+		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		usersRepository.save(user);
 	}
 
@@ -42,15 +46,5 @@ public class UsersService {
 
 	public void deleteUser(Long id) {
 		usersRepository.deleteById(id);
-	}
-	
-	public List<User> searchUsersByNameAndSurname(String searchText, User user) {
-		List<User> users = new LinkedList<User>();
-		searchText = "%" + searchText + "%";
-
-		if (user.getRole().equals("ROLE_ADMIN")) {
-			users = usersRepository.searchByNameAndSurname(searchText);
-		}
-		return users;
 	}
 }
