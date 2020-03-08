@@ -14,4 +14,5 @@ public interface UsersRepository extends CrudRepository<User, Long>{
 	Page<User> searchUser(Pageable pageable, String searchText);
 
 	Page<User> findAll(Pageable pageable);
+
 }

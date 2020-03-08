@@ -1,7 +1,10 @@
 package socialNetwork.entities;
 
-import javax.persistence.*;
-import java.util.Set; //A collection that contains no duplicate elements
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public class User {
@@ -13,7 +16,8 @@ public class User {
 	private String name;
 	private String lastName;
 	private String role;
-
+	
+	
 	private String password;
 	@Transient // propiedad que no se almacena e la tabla.
 	private String passwordConfirm;
@@ -87,6 +91,8 @@ public class User {
 	public void setRole(String string) {
 		this.role=string;
 	}
+	
+
 	
 	
 }

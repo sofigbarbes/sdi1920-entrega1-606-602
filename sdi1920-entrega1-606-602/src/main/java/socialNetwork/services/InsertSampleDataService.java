@@ -1,19 +1,23 @@
 package socialNetwork.services;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import socialNetwork.entities.FriendRequest;
 import socialNetwork.entities.User;
-
 
 @Service
 public class InsertSampleDataService {
 	@Autowired
 	private UsersService usersService;
-	
 
+	@Autowired
+	private FriendRequestService friendReqService;
 
 	@PostConstruct
 	public void init() {
@@ -38,7 +42,13 @@ public class InsertSampleDataService {
 		User user7 = new User("prueba", "Lucía", "Blanco");
 		user7.setPassword("123456");
 		user7.setRole("ROLE_USER");
-		
+
+		friendReqService.addFriendRequest(new FriendRequest("lucasnuñez@correo.com", "pedrodiaz@correo.com"));
+		friendReqService.addFriendRequest(new FriendRequest("mariarodriguez@correo.com", "pedrodiaz@correo.com"));
+		friendReqService.addFriendRequest(new FriendRequest("edwardnuñez@correo.com", "pedrodiaz@correo.com"));
+		friendReqService.addFriendRequest(new FriendRequest("pedrodiaz@correo.com", "lucasnuñez@correo.com"));
+		friendReqService.addFriendRequest(new FriendRequest("mariarodriguez@correo.com", "lucasnuñez@correo.com"));
+
 		usersService.addUser(user1);
 		usersService.addUser(user2);
 		usersService.addUser(user3);

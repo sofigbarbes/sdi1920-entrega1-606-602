@@ -1,8 +1,6 @@
 package socialNetwork.services;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 import javax.annotation.PostConstruct;
 
@@ -15,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import socialNetwork.entities.User;
 import socialNetwork.repositories.UsersRepository;
-
 
 @Service
 public class UsersService {
@@ -33,13 +30,13 @@ public class UsersService {
 		Page<User> users = usersRepository.findAll(pageable);
 		return users;
 	}
-	
-	public Page<User> getListUsers(Pageable pageable, String email){
+
+	public Page<User> getListUsers(Pageable pageable, String email) {
 		Page<User> users = getUsers(pageable);
 		LinkedList<User> content = new LinkedList<User>();
-		
+
 		for (User u : users.getContent()) {
-			if(!u.getEmail().equals(email) && !u.getRole().equals("ROLE_ADMIN")) {
+			if (!u.getEmail().equals(email) && !u.getRole().equals("ROLE_ADMIN")) {
 				content.add(u);
 			}
 		}
@@ -63,18 +60,19 @@ public class UsersService {
 	public void deleteUser(Long id) {
 		usersRepository.deleteById(id);
 	}
-	
-	public Page<User> searchUser(Pageable pageable, String searchtext, String email){
+
+	public Page<User> searchUser(Pageable pageable, String searchtext, String email) {
 		Page<User> users = new PageImpl<User>(new LinkedList<User>());
-		
+
 		LinkedList<User> content = new LinkedList<User>();
-		users = usersRepository.searchUser(pageable, "%"+searchtext+"%");
+		users = usersRepository.searchUser(pageable, "%" + searchtext + "%");
 		for (User u : users.getContent()) {
-			if(!u.getEmail().equals(email) && !u.getRole().equals("ROLE_ADMIN")) {
+			if (!u.getEmail().equals(email) && !u.getRole().equals("ROLE_ADMIN")) {
 				content.add(u);
 			}
 		}
 		Page<User> result = new PageImpl<User>(content);
 		return result;
 	}
+
 }
