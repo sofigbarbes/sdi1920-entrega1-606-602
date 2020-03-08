@@ -12,10 +12,12 @@ import socialNetwork.services.FriendRequestID;
 public class FriendRequest implements Serializable{
 	
 	@Id FriendRequestID id;
+	boolean accepted;
 
-	public FriendRequest(String senderEmail, String receiverEmail) {
+	public FriendRequest(String senderEmail, String receiverEmail, boolean accepted) {
 		super();
-		id=new FriendRequestID(senderEmail, receiverEmail);
+		this.id=new FriendRequestID(senderEmail, receiverEmail);
+		this.accepted=accepted;
 	}
 	
 	public FriendRequest() {
