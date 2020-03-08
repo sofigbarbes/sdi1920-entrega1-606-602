@@ -1,11 +1,15 @@
 package socialNetwork.services;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -25,20 +29,21 @@ public class UsersService {
 	public void init() {
 	}
 
-	public List<User> getUsers() {
-		List<User> users = new ArrayList<User>();
-		usersRepository.findAll().forEach(users::add);
+	public Page<User> getUsers(Pageable pageable) {
+		Page<User> users = usersRepository.findAll(pageable);
 		return users;
 	}
 	
-	public List<User> getListUsers(String email){
-		List<User> users = getUsers();
-		List<User> result = new ArrayList<User>();
-		for (User u : users) {
+	public Page<User> getListUsers(Pageable pageable, String email){
+		Page<User> users = getUsers(pageable);
+		LinkedList<User> content = new LinkedList<User>();
+		
+		for (User u : users.getContent()) {
 			if(!u.getEmail().equals(email) && !u.getRole().equals("ROLE_ADMIN")) {
-				result.add(u);
+				content.add(u);
 			}
 		}
+		Page<User> result = new PageImpl<User>(content);
 		return result;
 	}
 
@@ -59,14 +64,17 @@ public class UsersService {
 		usersRepository.deleteById(id);
 	}
 	
-	public List<User> searchUser(String searchtext, String email){
-		List<User> result = new ArrayList<User>();
-		List<User> users = usersRepository.searchUser("%"+searchtext+"%");
-		for (User u : users) {
+	public Page<User> searchUser(Pageable pageable, String searchtext, String email){
+		Page<User> users = new PageImpl<User>(new LinkedList<User>());
+		
+		LinkedList<User> content = new LinkedList<User>();
+		users = usersRepository.searchUser(pageable, "%"+searchtext+"%");
+		for (User u : users.getContent()) {
 			if(!u.getEmail().equals(email) && !u.getRole().equals("ROLE_ADMIN")) {
-				result.add(u);
+				content.add(u);
 			}
 		}
+		Page<User> result = new PageImpl<User>(content);
 		return result;
 	}
 }

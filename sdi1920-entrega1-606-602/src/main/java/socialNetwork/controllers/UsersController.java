@@ -1,7 +1,12 @@
 
 package socialNetwork.controllers;
 
+import java.util.LinkedList;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -25,7 +30,7 @@ import socialNetwork.validators.SignUpFormValidator;
 public class UsersController {
 	@Autowired
 	private UsersService usersService;
-	
+
 	@Autowired
 	private FriendRequestService friendRequestService;
 
@@ -68,66 +73,31 @@ public class UsersController {
 	}
 
 	@RequestMapping("/user/list")
-	public String getListado(Model model, 
+	public String getListado(Model model, Pageable pageable,
 			@RequestParam(value = "", required = false) String searchText) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String email = auth.getName();
 		
-		if(searchText!=null && !searchText.isEmpty()){
-			model.addAttribute("usersList", usersService.searchUser(searchText, email));
+		Page<User> users = new PageImpl<User>(new LinkedList<User>());
+		if (searchText != null && !searchText.isEmpty()) {
+			users = usersService.searchUser(pageable, searchText, email);
 		} else {
-			model.addAttribute("usersList", usersService.getListUsers(email));
+			users  = usersService.getListUsers(pageable, email);
 		}
+		model.addAttribute("usersList", users.getContent());
+		model.addAttribute("page", users);
 		return "user/list";
 	}
 
-	@RequestMapping(value = "/user/add")
-	public String getUser(Model model) {
-		model.addAttribute("usersList", usersService.getUsers());
-		return "user/add";
-	}
+	@RequestMapping(value = "/user/{email}/sendfriendreq", method = RequestMethod.GET)
+	public String setResendTrue(Model model, @PathVariable String email) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String senderEmail = auth.getName();
 
-	@RequestMapping(value = "/user/add", method = RequestMethod.POST)
-	public String setUser(@ModelAttribute User user) {
-		usersService.addUser(user);
+		FriendRequest fr = new FriendRequest(senderEmail, email);
+		friendRequestService.addFriendRequest(fr);
+
+		System.out.println("Envio peticion de " + senderEmail + " a " + email);
 		return "redirect:/user/list";
-	}
-
-	@RequestMapping("/user/details/{id}")
-	public String getDetail(Model model, @PathVariable Long id) {
-		model.addAttribute("user", usersService.getUser(id));
-		return "user/details";
-	}
-
-	@RequestMapping("/user/delete/{id}")
-	public String delete(@PathVariable Long id) {
-		usersService.deleteUser(id);
-		return "redirect:/user/list";
-	}
-
-	@RequestMapping(value = "/user/edit/{id}")
-	public String getEdit(Model model, @PathVariable Long id) {
-		User user = usersService.getUser(id);
-		model.addAttribute("user", user);
-		return "user/edit";
-	}
-
-	@RequestMapping(value = "/user/edit/{id}", method = RequestMethod.POST)
-	public String setEdit(Model model, @PathVariable Long id, @ModelAttribute User user) {
-		user.setId(id);
-		usersService.addUser(user);
-		return "redirect:/user/details/" + id;
-	}
-	
-	@RequestMapping(value="/user/{email}/sendfriendreq", method=RequestMethod.GET)
-	public String setResendTrue(Model model, @PathVariable String email){
-	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	String senderEmail = auth.getName();
-		
-	FriendRequest fr = new FriendRequest(senderEmail, email);
-	friendRequestService.addFriendRequest(fr);
-	
-	System.out.println("Envio peticion de "+senderEmail+" a "+email);
-	return "redirect:/user/list";
 	}
 }
