@@ -100,4 +100,14 @@ public class UsersController {
 		System.out.println("Envio peticion de " + senderEmail + " a " + email);
 		return "redirect:/user/list";
 	}
+	
+	@RequestMapping(value = "/user/friends", method = RequestMethod.GET)
+	public String getFriends() {
+		return null;
+	}
+	
+	@RequestMapping(value = "/user/requests", method = RequestMethod.GET)
+	public String getRequests() {
+		return null;
+	}
 }
