@@ -30,6 +30,17 @@ public class UsersService {
 		usersRepository.findAll().forEach(users::add);
 		return users;
 	}
+	
+	public List<User> getListUsers(String email){
+		List<User> users = getUsers();
+		List<User> result = new ArrayList<User>();
+		for (User u : users) {
+			if(!u.getEmail().equals(email) && !u.getRole().equals("ROLE_ADMIN")) {
+				result.add(u);
+			}
+		}
+		return result;
+	}
 
 	public User getUser(Long id) {
 		return usersRepository.findById(id).get();

@@ -66,7 +66,9 @@ public class UsersController {
 
 	@RequestMapping("/user/list")
 	public String getListado(Model model) {
-		model.addAttribute("usersList", usersService.getUsers());
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		 String email = auth.getName();
+		model.addAttribute("usersList", usersService.getListUsers(email));
 		return "user/list";
 	}
 
