@@ -12,5 +12,6 @@ public interface FriendRequestRepository extends CrudRepository<FriendRequest, S
 	@Query("SELECT r FROM FriendRequest r WHERE r.id.senderEmail = ?1 OR r.id.receiverEmail = ?1  ORDER BY r.id ASC ")
 	Page<FriendRequest> findAllByUser(Pageable pageable, String email);
 
+	public Page<FriendRequest> findAll(Pageable pageable);
 
 }

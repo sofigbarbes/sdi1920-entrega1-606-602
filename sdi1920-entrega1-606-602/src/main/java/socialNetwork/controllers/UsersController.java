@@ -99,9 +99,4 @@ public class UsersController {
 		System.out.println("Envio peticion de " + senderEmail + " a " + email);
 		return "redirect:/user/list";
 	}
-
-	@RequestMapping(value = "/user/requests", method = RequestMethod.GET)
-	public String getRequests() {
-		return null;
-	}
 }

@@ -17,4 +17,12 @@ public class FriendRequestID implements Serializable{
 	public FriendRequestID() {
 		
 	}
+	
+	public String getSender() {
+		return senderEmail;
+	}
+
+	public String getReceiver() {
+		return receiverEmail;
+	}
 }

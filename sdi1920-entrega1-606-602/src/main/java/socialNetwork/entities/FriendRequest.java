@@ -32,4 +32,10 @@ public class FriendRequest implements Serializable {
 	public void setAccepted(boolean accepted) {
 		this.accepted = accepted;
 	}
+	public String getSenderEmail() {
+		return id.getSender();
+	}
+	public String getReceiverEmail() {
+		return id.getReceiver();
+	}
 }

@@ -43,14 +43,6 @@ public class InsertSampleDataService {
 		user7.setPassword("123456");
 		user7.setRole("ROLE_USER");
 
-		friendReqService.addFriendRequest(new FriendRequest("lucasnuñez@correo.com", "pedrodiaz@correo.com", false));
-		friendReqService
-				.addFriendRequest(new FriendRequest("mariarodriguez@correo.com", "pedrodiaz@correo.com", false));
-		friendReqService.addFriendRequest(new FriendRequest("edwardnuñez@correo.com", "pedrodiaz@correo.com", false));
-		friendReqService.addFriendRequest(new FriendRequest("pedrodiaz@correo.com", "lucasnuñez@correo.com", false));
-		friendReqService
-				.addFriendRequest(new FriendRequest("mariarodriguez@correo.com", "lucasnuñez@correo.com", false));
-
 		usersService.addUser(user1);
 		usersService.addUser(user2);
 		usersService.addUser(user3);
@@ -67,5 +59,7 @@ public class InsertSampleDataService {
 		friendReqService.addFriendRequest(fr3);
 		FriendRequest fr4 = new FriendRequest("prueba", "pelayovaldes@correo.com", true);
 		friendReqService.addFriendRequest(fr4);
+		FriendRequest fr5 = new FriendRequest("pelayovaldes@correo.com", "prueba", true);
+		friendReqService.addFriendRequest(fr5);
 	}
 }
