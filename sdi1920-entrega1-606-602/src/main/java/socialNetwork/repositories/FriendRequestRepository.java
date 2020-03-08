@@ -5,7 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import socialNetwork.entities.FriendRequest;
+import socialNetwork.entities.FriendRequest; 
 
 public interface FriendRequestRepository extends CrudRepository<FriendRequest, String> {
 
