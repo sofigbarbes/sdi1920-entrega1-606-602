@@ -58,4 +58,15 @@ public class UsersService {
 	public void deleteUser(Long id) {
 		usersRepository.deleteById(id);
 	}
+	
+	public List<User> searchUser(String searchtext, String email){
+		List<User> result = new ArrayList<User>();
+		List<User> users = usersRepository.searchUser("%"+searchtext+"%");
+		for (User u : users) {
+			if(!u.getEmail().equals(email) && !u.getRole().equals("ROLE_ADMIN")) {
+				result.add(u);
+			}
+		}
+		return result;
+	}
 }

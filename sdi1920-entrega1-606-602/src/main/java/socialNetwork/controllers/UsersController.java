@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import socialNetwork.entities.User;
 import socialNetwork.services.SecurityService;
 import socialNetwork.services.UsersService;
 import socialNetwork.validators.SignUpFormValidator;
-
 
 @Controller
 public class UsersController {
@@ -26,7 +26,7 @@ public class UsersController {
 
 	@Autowired
 	private SecurityService securityService;
-	
+
 	@Autowired
 	private SignUpFormValidator signUpFormValidator;
 
@@ -40,11 +40,11 @@ public class UsersController {
 	public String signup(@Validated User user, BindingResult result) {
 		System.out.println("entered post");
 		signUpFormValidator.validate(user, result);
-		if(result.hasErrors()) {
+		if (result.hasErrors()) {
 			System.out.println("result has errors");
 			return "signup";
 		}
-		
+
 		usersService.addUser(user);
 		securityService.autoLogin(user.getEmail(), user.getPasswordConfirm());
 		return "redirect:home";
@@ -57,18 +57,24 @@ public class UsersController {
 
 	@RequestMapping(value = { "/home" }, method = RequestMethod.GET)
 	public String home(Model model) {
-		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		 String email = auth.getName();
-		 User activeUser = usersService.getUserByEmail(email);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String email = auth.getName();
+		User activeUser = usersService.getUserByEmail(email);
 		return "home";
 
 	}
 
 	@RequestMapping("/user/list")
-	public String getListado(Model model) {
+	public String getListado(Model model, 
+			@RequestParam(value = "", required = false) String searchText) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		 String email = auth.getName();
-		model.addAttribute("usersList", usersService.getListUsers(email));
+		String email = auth.getName();
+		
+		if(searchText!=null && !searchText.isEmpty()){
+			model.addAttribute("usersList", usersService.searchUser(searchText, email));
+		} else {
+			model.addAttribute("usersList", usersService.getListUsers(email));
+		}
 		return "user/list";
 	}
 
