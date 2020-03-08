@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 import socialNetwork.services.FriendRequestID;
 
@@ -14,11 +12,14 @@ public class FriendRequest implements Serializable {
 
 	@Id
 	FriendRequestID id;
+
 	boolean accepted;
 
-	public FriendRequest(String senderEmail, String receiverEmail) {
+	public FriendRequest(String senderEmail, String receiverEmail, boolean accepted) {
 		super();
 		id = new FriendRequestID(senderEmail, receiverEmail);
+
+		this.accepted=accepted;
 	}
 
 	public FriendRequest() {

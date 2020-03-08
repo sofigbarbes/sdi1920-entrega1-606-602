@@ -93,7 +93,7 @@ public class UsersController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String senderEmail = auth.getName();
 
-		FriendRequest fr = new FriendRequest(senderEmail, email);
+		FriendRequest fr = new FriendRequest(senderEmail, email, false);
 		friendRequestService.addFriendRequest(fr);
 
 		System.out.println("Envio peticion de " + senderEmail + " a " + email);

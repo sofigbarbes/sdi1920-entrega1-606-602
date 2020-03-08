@@ -43,11 +43,13 @@ public class InsertSampleDataService {
 		user7.setPassword("123456");
 		user7.setRole("ROLE_USER");
 
-		friendReqService.addFriendRequest(new FriendRequest("lucasnuñez@correo.com", "pedrodiaz@correo.com"));
-		friendReqService.addFriendRequest(new FriendRequest("mariarodriguez@correo.com", "pedrodiaz@correo.com"));
-		friendReqService.addFriendRequest(new FriendRequest("edwardnuñez@correo.com", "pedrodiaz@correo.com"));
-		friendReqService.addFriendRequest(new FriendRequest("pedrodiaz@correo.com", "lucasnuñez@correo.com"));
-		friendReqService.addFriendRequest(new FriendRequest("mariarodriguez@correo.com", "lucasnuñez@correo.com"));
+		friendReqService.addFriendRequest(new FriendRequest("lucasnuñez@correo.com", "pedrodiaz@correo.com", false));
+		friendReqService
+				.addFriendRequest(new FriendRequest("mariarodriguez@correo.com", "pedrodiaz@correo.com", false));
+		friendReqService.addFriendRequest(new FriendRequest("edwardnuñez@correo.com", "pedrodiaz@correo.com", false));
+		friendReqService.addFriendRequest(new FriendRequest("pedrodiaz@correo.com", "lucasnuñez@correo.com", false));
+		friendReqService
+				.addFriendRequest(new FriendRequest("mariarodriguez@correo.com", "lucasnuñez@correo.com", false));
 
 		usersService.addUser(user1);
 		usersService.addUser(user2);
@@ -56,5 +58,14 @@ public class InsertSampleDataService {
 		usersService.addUser(user5);
 		usersService.addUser(user6);
 		usersService.addUser(user7);
+
+		FriendRequest fr1 = new FriendRequest("edwardnuñez@correo.com", "prueba", false);
+		friendReqService.addFriendRequest(fr1);
+		FriendRequest fr2 = new FriendRequest("pelayovaldes@correo.com", "edwardnuñez@correo.com", true);
+		friendReqService.addFriendRequest(fr2);
+		FriendRequest fr3 = new FriendRequest("pelayovaldes@correo.com", "mariarodriguez@correo.com", false);
+		friendReqService.addFriendRequest(fr3);
+		FriendRequest fr4 = new FriendRequest("prueba", "pelayovaldes@correo.com", true);
+		friendReqService.addFriendRequest(fr4);
 	}
 }
