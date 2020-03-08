@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import socialNetwork.entities.FriendRequest;
 import socialNetwork.entities.User;
+import socialNetwork.services.FriendRequestService;
 import socialNetwork.services.SecurityService;
 import socialNetwork.services.UsersService;
 import socialNetwork.validators.SignUpFormValidator;
@@ -23,6 +25,9 @@ import socialNetwork.validators.SignUpFormValidator;
 public class UsersController {
 	@Autowired
 	private UsersService usersService;
+	
+	@Autowired
+	private FriendRequestService friendRequestService;
 
 	@Autowired
 	private SecurityService securityService;
@@ -38,10 +43,8 @@ public class UsersController {
 
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
 	public String signup(@Validated User user, BindingResult result) {
-		System.out.println("entered post");
 		signUpFormValidator.validate(user, result);
 		if (result.hasErrors()) {
-			System.out.println("result has errors");
 			return "signup";
 		}
 
@@ -114,5 +117,17 @@ public class UsersController {
 		user.setId(id);
 		usersService.addUser(user);
 		return "redirect:/user/details/" + id;
+	}
+	
+	@RequestMapping(value="/user/{email}/sendfriendreq", method=RequestMethod.GET)
+	public String setResendTrue(Model model, @PathVariable String email){
+	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	String senderEmail = auth.getName();
+		
+	FriendRequest fr = new FriendRequest(senderEmail, email);
+	friendRequestService.addFriendRequest(fr);
+	
+	System.out.println("Envio peticion de "+senderEmail+" a "+email);
+	return "redirect:/user/list";
 	}
 }
