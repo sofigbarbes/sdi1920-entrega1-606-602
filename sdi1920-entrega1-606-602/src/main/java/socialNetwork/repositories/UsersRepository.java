@@ -18,4 +18,7 @@ public interface UsersRepository extends CrudRepository<User, Long>{
 
 	Page<User> findAll(Pageable pageable);
 
+	@Query("SELECT u FROM User u WHERE u.email IN (SELECT r.id.senderEmail FROM FriendRequest r WHERE (r.id.receiverEmail = ?1 and r.accepted='true') )")
+	Page<User> findFriendsOfUser(Pageable pageable, String email);
+	
 }

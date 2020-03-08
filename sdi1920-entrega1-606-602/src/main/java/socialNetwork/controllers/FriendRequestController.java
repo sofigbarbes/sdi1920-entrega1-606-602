@@ -2,7 +2,6 @@
 package socialNetwork.controllers;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,11 +40,14 @@ public class FriendRequestController {
 		User user = usersService.getUserByEmail(email);
 		
 		Page<FriendRequest> fr = new PageImpl<FriendRequest>(new LinkedList<FriendRequest>());
-
+		
 		fr = friendRequestService.getRequestsForUser(pageable, user);
+		Page<User> fr2 = new PageImpl<User>(new LinkedList<User>());
 
-		model.addAttribute("reqList", fr.getContent());
-		model.addAttribute("page", fr);
+		fr2=usersService.getFriends(pageable, user.getEmail());
+		
+		model.addAttribute("reqList", fr2.getContent());
+		model.addAttribute("page", fr2);
 
 		return "friend/list";
 	}
@@ -71,5 +75,5 @@ public class FriendRequestController {
 		System.out.println("Acepto peticion de " + email + " a " + myEmail);
 		return "redirect:/request/list";
 	}
-
+	
 }

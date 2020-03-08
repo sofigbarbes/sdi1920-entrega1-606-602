@@ -72,5 +72,11 @@ public class InsertSampleDataService {
 		friendReqService.addFriendRequest(fr7);
 		FriendRequest fr8 = new FriendRequest("pelayovaldes@correo.com", "sofi", true);
 		friendReqService.addFriendRequest(fr8);
+		FriendRequest fr9 = new FriendRequest("prueba", "sofi", false);
+		friendReqService.addFriendRequest(fr9);
+		FriendRequest fr10 = new FriendRequest("mariarodriguez@correo.com", "sofi", true);
+		friendReqService.addFriendRequest(fr10);
+		FriendRequest fr11 = new FriendRequest("martaalmonte@correo.com", "sofi", true);
+		friendReqService.addFriendRequest(fr11);
 	}
 }

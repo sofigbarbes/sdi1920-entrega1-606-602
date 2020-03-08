@@ -1,6 +1,8 @@
 package socialNetwork.services;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 
@@ -48,4 +50,24 @@ public class FriendRequestService {
 		Page<FriendRequest> result = friendReqRep.findRequestToUser(pageable, email);
 		return result;
 	}
+	
+	
+	public Page<FriendRequest> searchFriend(Pageable pageable, String searchtext, String email) {
+		Page<FriendRequest> users = new PageImpl<FriendRequest>(new LinkedList<FriendRequest>());
+
+		LinkedList<FriendRequest> content = new LinkedList<FriendRequest>();
+		users = friendReqRep.searchFriend(pageable, "%" + searchtext + "%");
+		for (FriendRequest u : users.getContent()) {
+			if (!u.getSenderEmail().equals(email)) {
+				content.add(u);
+			}
+		}
+		Page<FriendRequest> result = new PageImpl<FriendRequest>(content);
+		return result;
+	}
+
+
+	
+	
+
 }

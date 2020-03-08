@@ -5,7 +5,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import socialNetwork.entities.FriendRequest; 
+import socialNetwork.entities.FriendRequest;
+import socialNetwork.entities.User; 
 
 public interface FriendRequestRepository extends CrudRepository<FriendRequest, String> {
 
@@ -16,5 +17,8 @@ public interface FriendRequestRepository extends CrudRepository<FriendRequest, S
 	Page<FriendRequest> findFriendsOfUser(Pageable pageable, String email);
 	
 	Page<FriendRequest> findAll(Pageable pageable);
+	
+	@Query("SELECT r FROM FriendRequest r WHERE (LOWER(r.id.receiverEmail) LIKE LOWER(?1) and r.accepted='true') ")
+	Page<FriendRequest> searchFriend(Pageable pageable, String string);
 
 }

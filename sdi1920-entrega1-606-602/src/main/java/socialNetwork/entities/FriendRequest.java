@@ -38,4 +38,5 @@ public class FriendRequest implements Serializable {
 	public String getReceiverEmail() {
 		return id.getReceiver();
 	}
+	
 }

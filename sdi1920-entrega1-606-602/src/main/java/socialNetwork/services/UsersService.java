@@ -66,5 +66,9 @@ public class UsersService {
 		Page<User> result = new PageImpl<User>(content);
 		return result;
 	}
+	
+	public Page<User> getFriends(Pageable pageable,String email){
+		return usersRepository.findFriendsOfUser(pageable, email);
+	}
 
 }

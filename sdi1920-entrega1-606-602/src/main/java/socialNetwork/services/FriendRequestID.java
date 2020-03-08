@@ -4,10 +4,13 @@ import java.io.Serializable;
 
 import javax.persistence.Embeddable;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 @Embeddable
 public class FriendRequestID implements Serializable{
 	String senderEmail;
 	String receiverEmail;
+	
 	
 	public FriendRequestID(String sender, String receiver) {
 		this.senderEmail=sender;
@@ -25,4 +28,5 @@ public class FriendRequestID implements Serializable{
 	public String getReceiver() {
 		return receiverEmail;
 	}
+
 }
