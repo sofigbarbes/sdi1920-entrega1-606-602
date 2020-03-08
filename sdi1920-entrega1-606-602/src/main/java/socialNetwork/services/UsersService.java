@@ -32,16 +32,8 @@ public class UsersService {
 	}
 
 	public Page<User> getListUsers(Pageable pageable, String email) {
-		Page<User> users = getUsers(pageable);
-		LinkedList<User> content = new LinkedList<User>();
-
-		for (User u : users.getContent()) {
-			if (!u.getEmail().equals(email) && !u.getRole().equals("ROLE_ADMIN")) {
-				content.add(u);
-			}
-		}
-		Page<User> result = new PageImpl<User>(content);
-		return result;
+		Page<User> users = usersRepository.listUsers(pageable, email);
+		return users;
 	}
 
 	public User getUser(Long id) {
