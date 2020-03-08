@@ -19,16 +19,12 @@
 				<thead>
 					<tr>
 						<th>Email</th>
-						<th>Nombre</th>
-						<th>Apellidos</th>
 						<th class="col-md-1"></th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="friend : ${friendsList}">
-						<td th:text="${user.email}">email@email.com</td>
-						<td th:text="${user.name}">Nombre</td>
-						<td th:text="${user.lastName}">Apellidos</td>
+					<tr th:each="req : ${reqList}">
+						<td th:text="${req.getSenderEmail()}">email@email.com</td>
 					</tr>
 				</tbody>
 			</table>

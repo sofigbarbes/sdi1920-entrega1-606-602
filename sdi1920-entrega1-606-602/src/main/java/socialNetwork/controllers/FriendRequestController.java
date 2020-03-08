@@ -38,12 +38,12 @@ public class FriendRequestController {
 		String email = principal.getName();
 		User user = usersService.getUserByEmail(email);
 		
-		Page<FriendRequest> marks = new PageImpl<FriendRequest>(new LinkedList<FriendRequest>());
+		Page<FriendRequest> fr = new PageImpl<FriendRequest>(new LinkedList<FriendRequest>());
 
-		marks = friendRequestService.getRequestsForUser(pageable, user);
+		fr = friendRequestService.getRequestsForUser(pageable, user);
 
-		model.addAttribute("friendList", marks.getContent());
-		model.addAttribute("page", marks);
+		model.addAttribute("reqList", fr.getContent());
+		model.addAttribute("page", fr);
 
 		return "friend/list";
 	}

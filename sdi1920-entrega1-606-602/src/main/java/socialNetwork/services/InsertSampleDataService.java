@@ -1,8 +1,5 @@
 package socialNetwork.services;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +39,9 @@ public class InsertSampleDataService {
 		User user7 = new User("prueba", "Lucía", "Blanco");
 		user7.setPassword("123456");
 		user7.setRole("ROLE_USER");
+		User user8 = new User("sofi", "Sofía", "garcía");
+		user8.setPassword("123456");
+		user8.setRole("ROLE_USER");
 
 		usersService.addUser(user1);
 		usersService.addUser(user2);
@@ -50,6 +50,7 @@ public class InsertSampleDataService {
 		usersService.addUser(user5);
 		usersService.addUser(user6);
 		usersService.addUser(user7);
+		usersService.addUser(user8);
 
 		FriendRequest fr1 = new FriendRequest("edwardnuñez@correo.com", "prueba", false);
 		friendReqService.addFriendRequest(fr1);
@@ -61,5 +62,13 @@ public class InsertSampleDataService {
 		friendReqService.addFriendRequest(fr4);
 		FriendRequest fr5 = new FriendRequest("pelayovaldes@correo.com", "prueba", true);
 		friendReqService.addFriendRequest(fr5);
+
+		// A PARTIR DE AQUI NO WORKEA
+		FriendRequest fr6 = new FriendRequest("edwardnuñez@correo.com", "sofi", false);
+		friendReqService.addFriendRequest(fr6);
+		FriendRequest fr7 = new FriendRequest("sofi", "pelayovaldes@correo.com", true);
+		friendReqService.addFriendRequest(fr7);
+		FriendRequest fr8 = new FriendRequest("pelayovaldes@correo.com", "sofi", false);
+		friendReqService.addFriendRequest(fr8);
 	}
 }

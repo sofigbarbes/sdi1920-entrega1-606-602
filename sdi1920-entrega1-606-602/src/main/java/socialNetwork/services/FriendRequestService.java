@@ -30,9 +30,17 @@ public class FriendRequestService {
 
 	public Page<FriendRequest> getRequestsForUser(Pageable pageable, User user) {
 		Page<FriendRequest> requests = new PageImpl<FriendRequest>(new LinkedList<FriendRequest>());
-		requests = friendReqRep.findAllByUser(pageable, user.getEmail());
-
-		return requests;
+		LinkedList<FriendRequest> content = new LinkedList<FriendRequest>();
+		requests=friendReqRep.findAll(pageable);
+	
+		for (FriendRequest fr : requests.getContent()) {
+			if(fr.getReceiverEmail().equals(user.getEmail()) && fr.isAccepted()) {
+				content.add(fr);
+			}
+		}
+		
+		Page<FriendRequest> result = new PageImpl<FriendRequest>(content);
+		return result;
 	}
 
 	public Page<FriendRequest> getRequests(Pageable pageable, String email) {
