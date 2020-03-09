@@ -1,4 +1,4 @@
-package com.socialNetwork.tests.utils;
+package socialNetwork.utils;
 
 
 import java.util.List;
