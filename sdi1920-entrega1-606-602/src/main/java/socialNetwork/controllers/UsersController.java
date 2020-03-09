@@ -70,7 +70,7 @@ public class UsersController {
 	public String home(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String email = auth.getName();
-		User activeUser = usersService.getUserByEmail(email);
+		usersService.getUserByEmail(email);
 		return "home";
 
 	}
