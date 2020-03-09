@@ -21,4 +21,10 @@ public interface UsersRepository extends CrudRepository<User, Long>{
 	@Query("SELECT u FROM User u WHERE u.email IN (SELECT r.id.senderEmail FROM FriendRequest r WHERE (r.id.receiverEmail = ?1 and r.accepted='true') )")
 	Page<User> findFriendsOfUser(Pageable pageable, String email);
 	
+	@Query("SELECT u FROM User u WHERE u.email IN (SELECT r.id.senderEmail FROM FriendRequest r WHERE (r.id.receiverEmail = ?1 and r.accepted='false' and r.show='true') )")
+	Page<User> findRequestToUser(Pageable pageable, String email);
+	
+	@Query("SELECT u FROM User u WHERE u.email IN (SELECT r.id.receiverEmail FROM FriendRequest r WHERE (r.id.senderEmail = ?1 and r.accepted='false' and r.show='true') )")
+	Page<User> findRequestByUser(Pageable pageable, String email);
+	
 }

@@ -89,9 +89,13 @@ public class UsersController {
 		}
 		
 		Page<User> friends = usersService.getFriends(pageable, email);
+		Page<User> reqsTo = usersService.getReqToUser(pageable, email);
+		Page<User> reqsBy = usersService.getReqByUser(pageable, email);
 		
 		model.addAttribute("usersList", users.getContent());
 		model.addAttribute("friendsList", friends.getContent());
+		model.addAttribute("reqsToList", reqsTo.getContent());
+		model.addAttribute("reqsByList", reqsBy.getContent());
 		model.addAttribute("page", users);
 		return "user/list";
 	}
