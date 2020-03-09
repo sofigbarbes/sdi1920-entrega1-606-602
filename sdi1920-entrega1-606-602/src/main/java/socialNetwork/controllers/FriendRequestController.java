@@ -67,13 +67,17 @@ public class FriendRequestController {
 		return "request/list";
 	}
 	
-	@RequestMapping(value = "/request/{email}/acceptreq", method = RequestMethod.GET)
-	public String setResendTrue(Model model, @PathVariable String email) {
+	@RequestMapping(value = "/request/{email}/accept", method = RequestMethod.GET)
+	public String acceptRequest(Model model, @PathVariable String email) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String myEmail = auth.getName();
 
+		friendRequestService.acceptRequest(email, myEmail);
+		
 		System.out.println("Acepto peticion de " + email + " a " + myEmail);
-		return "redirect:/request/list";
+		return "redirect:/friendRequest/listAccepted";
 	}
+	
+
 	
 }

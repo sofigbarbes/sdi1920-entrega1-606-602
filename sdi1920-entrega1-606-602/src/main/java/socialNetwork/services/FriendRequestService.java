@@ -67,6 +67,11 @@ public class FriendRequestService {
 	}
 
 
+	public void acceptRequest( String sender, String receiver) {
+		friendReqRep.acceptRequest(sender, receiver);
+	}
+
+
 	
 	
 

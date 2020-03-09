@@ -17,7 +17,7 @@
 				<tbody>
 					<tr th:each="req : ${reqList}">
 						<td th:text="${req.getSenderEmail()}">email@email.com</td>
-						<td><a th:href="${'/request/' + req.getSenderEmail() + '/acceptreq'}">Aceptar solicitud de amistad</a></td>
+						<td><a th:href="${'/request/' + req.getSenderEmail() + '/accept'}">Aceptar solicitud de amistad</a></td>
 					</tr>
 				</tbody>
 			</table>
