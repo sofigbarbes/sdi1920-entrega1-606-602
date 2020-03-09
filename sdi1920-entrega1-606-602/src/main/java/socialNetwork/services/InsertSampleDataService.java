@@ -55,4 +55,5 @@ public class InsertSampleDataService {
 		usersService.addUser(user7);
 		usersService.addUser(user8);
 	}
+	
 }

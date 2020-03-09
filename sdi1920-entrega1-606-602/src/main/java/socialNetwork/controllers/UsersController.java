@@ -110,6 +110,7 @@ public class UsersController {
 			FriendRequest fr2 = new FriendRequest(email, senderEmail, false, false);
 			friendRequestService.addFriendRequest(fr2);
 		}
+	
 		
 		return "redirect:/user/list";
 	}

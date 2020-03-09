@@ -70,5 +70,6 @@ public class UsersService {
 	public Page<User> getFriends(Pageable pageable,String email){
 		return usersRepository.findFriendsOfUser(pageable, email);
 	}
+	
 
 }

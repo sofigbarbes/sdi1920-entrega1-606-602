@@ -42,6 +42,7 @@ public class FriendRequest implements Serializable {
 	}
 	public boolean isShow() {
 		return show;
+	
 	}
 	
 }
