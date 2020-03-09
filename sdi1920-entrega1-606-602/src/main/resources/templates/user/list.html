@@ -29,8 +29,11 @@
 						<td th:text="${user.email}"></td>
 						<td th:text="${user.name}"></td>
 						<td th:text="${user.lastName}"></td>
-						<td><a th:href="${'/user/' + user.email + '/sendfriendreq'}"
-							th:text="#{sendRequest}"></a></td>
+						<td>
+							<div th:if="${friendsList.contains(user)}"><p>Ya agregado</p></div>
+							<div th:if="${!friendsList.contains(user)}"><a th:href="${'/user/' + user.email + '/sendfriendreq'}"
+							th:text="#{sendRequest}"></a></div>
+						</td>
 					</tr>
 				</tbody>
 			</table>

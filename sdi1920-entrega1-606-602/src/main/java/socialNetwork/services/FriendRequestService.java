@@ -34,12 +34,10 @@ public class FriendRequestService {
 		Page<FriendRequest> result = friendReqRep.findRequestToUser(pageable, email);
 		return result;
 	}
-	
-	
-
 
 	public void acceptRequest( String sender, String receiver) {
-		friendReqRep.acceptRequest(sender, receiver);
+		friendReqRep.acceptRequest1(sender, receiver);
+		friendReqRep.acceptRequest2(sender, receiver);
 	}
 
 

@@ -54,28 +54,5 @@ public class InsertSampleDataService {
 		usersService.addUser(user6);
 		usersService.addUser(user7);
 		usersService.addUser(user8);
-
-		FriendRequest fr1 = new FriendRequest("edwardnuñez@correo.com", "luci", false);
-		friendReqService.addFriendRequest(fr1);
-		FriendRequest fr2 = new FriendRequest("pelayovaldes@correo.com", "edwardnuñez@correo.com", true);
-		friendReqService.addFriendRequest(fr2);
-		FriendRequest fr3 = new FriendRequest("pelayovaldes@correo.com", "mariarodriguez@correo.com", false);
-		friendReqService.addFriendRequest(fr3);
-		FriendRequest fr4 = new FriendRequest("luci", "pelayovaldes@correo.com", true);
-		friendReqService.addFriendRequest(fr4);
-		FriendRequest fr5 = new FriendRequest("pelayovaldes@correo.com", "luci", true);
-		friendReqService.addFriendRequest(fr5);
-		FriendRequest fr6 = new FriendRequest("edwardnuñez@correo.com", "sofi", false);
-		friendReqService.addFriendRequest(fr6);
-		FriendRequest fr7 = new FriendRequest("sofi", "pelayovaldes@correo.com", false);
-		friendReqService.addFriendRequest(fr7);
-		FriendRequest fr8 = new FriendRequest("pelayovaldes@correo.com", "sofi", true);
-		friendReqService.addFriendRequest(fr8);
-		FriendRequest fr9 = new FriendRequest("luci", "sofi", false);
-		friendReqService.addFriendRequest(fr9);
-		FriendRequest fr10 = new FriendRequest("mariarodriguez@correo.com", "sofi", true);
-		friendReqService.addFriendRequest(fr10);
-		FriendRequest fr11 = new FriendRequest("martaalmonte@correo.com", "sofi", true);
-		friendReqService.addFriendRequest(fr11);
 	}
 }

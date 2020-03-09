@@ -11,7 +11,7 @@ import socialNetwork.entities.FriendRequest;
 
 public interface FriendRequestRepository extends CrudRepository<FriendRequest, String> {
 
-	@Query("SELECT r FROM FriendRequest r WHERE (r.id.receiverEmail = ?1 and r.accepted='false') ")
+	@Query("SELECT r FROM FriendRequest r WHERE (r.id.receiverEmail = ?1 and r.accepted='false' and r.show='true') ")
 	Page<FriendRequest> findRequestToUser(Pageable pageable, String email);
  
 	@Query("SELECT r FROM FriendRequest r WHERE (r.id.receiverEmail = ?1 and r.accepted='true') ")
@@ -28,6 +28,11 @@ public interface FriendRequestRepository extends CrudRepository<FriendRequest, S
 	@Transactional
 	@Modifying
 	@Query("UPDATE FriendRequest r SET r.accepted=true WHERE r.id.senderEmail=?1 AND r.id.receiverEmail=?2")
-	void acceptRequest(String sender, String receiver);
+	void acceptRequest1(String sender, String receiver);
+	
+	@Transactional
+	@Modifying
+	@Query("UPDATE FriendRequest r SET r.accepted=true WHERE r.id.senderEmail=?2 AND r.id.receiverEmail=?1")
+	void acceptRequest2(String sender, String receiver);
 
 }

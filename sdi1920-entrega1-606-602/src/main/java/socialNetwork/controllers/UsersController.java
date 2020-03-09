@@ -87,7 +87,11 @@ public class UsersController {
 		} else {
 			users = usersService.getListUsers(pageable, email);
 		}
+		
+		Page<User> friends = usersService.getFriends(pageable, email);
+		
 		model.addAttribute("usersList", users.getContent());
+		model.addAttribute("friendsList", friends.getContent());
 		model.addAttribute("page", users);
 		return "user/list";
 	}
@@ -100,8 +104,11 @@ public class UsersController {
 		User user = usersService.getUserByEmail(email);
 		
 		if(!user.getRole().equals("ROLE_ADMIN")) {
-			FriendRequest fr = new FriendRequest(senderEmail, email, false);
+			FriendRequest fr = new FriendRequest(senderEmail, email, false, true);
 			friendRequestService.addFriendRequest(fr);
+			
+			FriendRequest fr2 = new FriendRequest(email, senderEmail, false, false);
+			friendRequestService.addFriendRequest(fr2);
 		}
 		
 		return "redirect:/user/list";
