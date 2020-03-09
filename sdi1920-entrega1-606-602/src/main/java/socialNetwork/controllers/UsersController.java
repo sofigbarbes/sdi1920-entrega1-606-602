@@ -96,11 +96,14 @@ public class UsersController {
 	public String setResendTrue(Model model, @PathVariable String email) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String senderEmail = auth.getName();
-
-		FriendRequest fr = new FriendRequest(senderEmail, email, false);
-		friendRequestService.addFriendRequest(fr);
-
-		System.out.println("Envio peticion de " + senderEmail + " a " + email);
+		
+		User user = usersService.getUserByEmail(email);
+		
+		if(!user.getRole().equals("ROLE_ADMIN")) {
+			FriendRequest fr = new FriendRequest(senderEmail, email, false);
+			friendRequestService.addFriendRequest(fr);
+		}
+		
 		return "redirect:/user/list";
 	}
 }

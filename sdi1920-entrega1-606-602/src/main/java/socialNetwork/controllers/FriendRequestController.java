@@ -55,7 +55,6 @@ public class FriendRequestController {
 		Page<FriendRequest> reqs = new PageImpl<FriendRequest>(new LinkedList<FriendRequest>());
 
 		reqs = friendRequestService.getRequests(pageable, email);
-		System.out.println(reqs.getContent().toString());
 		model.addAttribute("reqList", reqs.getContent());
 		model.addAttribute("page", reqs);
 
@@ -68,9 +67,7 @@ public class FriendRequestController {
 		String myEmail = auth.getName();
 
 		friendRequestService.acceptRequest(email, myEmail);
-
-		System.out.println("Acepto peticion de " + email + " a " + myEmail);
-		return "redirect:/friendRequest/listAccepted";
+		return "redirect:/request/list";
 	}
 
 }

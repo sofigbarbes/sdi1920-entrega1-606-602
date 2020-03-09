@@ -16,7 +16,6 @@ public class InsertSampleDataService {
 	@Autowired
 	private FriendRequestService friendReqService;
 
-
 	@Autowired
 	private RolesService rolesService;
 
@@ -40,7 +39,7 @@ public class InsertSampleDataService {
 		User user6 = new User("edwardnuñez@correo.com", "Edward", "Núñez");
 		user6.setPassword("123456");
 		user6.setRole(rolesService.getRoles()[0]);
-		User user7 = new User("prueba", "Lucía", "Blanco");
+		User user7 = new User("luci", "Lucía", "Blanco");
 		user7.setPassword("123456");
 		user7.setRole(rolesService.getRoles()[0]);
 		User user8 = new User("sofi", "Sofía", "garcía");
@@ -56,15 +55,15 @@ public class InsertSampleDataService {
 		usersService.addUser(user7);
 		usersService.addUser(user8);
 
-		FriendRequest fr1 = new FriendRequest("edwardnuñez@correo.com", "prueba", false);
+		FriendRequest fr1 = new FriendRequest("edwardnuñez@correo.com", "luci", false);
 		friendReqService.addFriendRequest(fr1);
 		FriendRequest fr2 = new FriendRequest("pelayovaldes@correo.com", "edwardnuñez@correo.com", true);
 		friendReqService.addFriendRequest(fr2);
 		FriendRequest fr3 = new FriendRequest("pelayovaldes@correo.com", "mariarodriguez@correo.com", false);
 		friendReqService.addFriendRequest(fr3);
-		FriendRequest fr4 = new FriendRequest("prueba", "pelayovaldes@correo.com", true);
+		FriendRequest fr4 = new FriendRequest("luci", "pelayovaldes@correo.com", true);
 		friendReqService.addFriendRequest(fr4);
-		FriendRequest fr5 = new FriendRequest("pelayovaldes@correo.com", "prueba", true);
+		FriendRequest fr5 = new FriendRequest("pelayovaldes@correo.com", "luci", true);
 		friendReqService.addFriendRequest(fr5);
 		FriendRequest fr6 = new FriendRequest("edwardnuñez@correo.com", "sofi", false);
 		friendReqService.addFriendRequest(fr6);
@@ -72,7 +71,7 @@ public class InsertSampleDataService {
 		friendReqService.addFriendRequest(fr7);
 		FriendRequest fr8 = new FriendRequest("pelayovaldes@correo.com", "sofi", true);
 		friendReqService.addFriendRequest(fr8);
-		FriendRequest fr9 = new FriendRequest("prueba", "sofi", false);
+		FriendRequest fr9 = new FriendRequest("luci", "sofi", false);
 		friendReqService.addFriendRequest(fr9);
 		FriendRequest fr10 = new FriendRequest("mariarodriguez@correo.com", "sofi", true);
 		friendReqService.addFriendRequest(fr10);
