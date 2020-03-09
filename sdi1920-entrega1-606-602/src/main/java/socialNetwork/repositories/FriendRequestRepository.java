@@ -13,7 +13,7 @@ public interface FriendRequestRepository extends CrudRepository<FriendRequest, S
 
 	@Query("SELECT r FROM FriendRequest r WHERE (r.id.receiverEmail = ?1 and r.accepted='false') ")
 	Page<FriendRequest> findRequestToUser(Pageable pageable, String email);
-
+ 
 	@Query("SELECT r FROM FriendRequest r WHERE (r.id.receiverEmail = ?1 and r.accepted='true') ")
 	Page<FriendRequest> findFriendsOfUser(Pageable pageable, String email);
 
