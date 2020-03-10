@@ -29,8 +29,14 @@
 						<td th:text="${user.email}"></td>
 						<td th:text="${user.name}"></td>
 						<td th:text="${user.lastName}"></td>
-						<td><a th:href="${'/user/' + user.email + '/sendfriendreq'}"
-							th:text="#{sendRequest}"></a></td>
+						<td>
+							<div th:if="${friendsList.contains(user)}"><p>Ya agregado</p></div>
+							<div th:if="${!friendsList.contains(user) and !reqsToList.contains(user) and !reqsByList.contains(user)}">
+								<a th:href="${'/user/' + user.email + '/sendfriendreq'}"
+							th:text="#{sendRequest}"></a></div>
+							<div th:if="${reqsToList.contains(user)}"><p>Recibida solicitud de amistad</p></div>
+							<div th:if="${reqsByList.contains(user)}"><p>Solicitud de amistad enviada</p></div>
+						</td>
 					</tr>
 				</tbody>
 			</table>

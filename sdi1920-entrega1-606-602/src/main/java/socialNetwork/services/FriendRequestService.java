@@ -35,11 +35,10 @@ public class FriendRequestService {
 		return result;
 	}
 	
-	
-
 
 	public void acceptRequest( String sender, String receiver) {
-		friendReqRep.acceptRequest(sender, receiver);
+		friendReqRep.acceptRequest1(sender, receiver);
+		friendReqRep.acceptRequest2(sender, receiver);
 	}
 
 

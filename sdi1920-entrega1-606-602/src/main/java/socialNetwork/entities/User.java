@@ -92,7 +92,10 @@ public class User {
 		this.role=string;
 	}
 	
-
+	boolean hola() {
+		System.out.println("Hola");
+		return true;
+	}
 	
 	
 }

@@ -14,12 +14,14 @@ public class FriendRequest implements Serializable {
 	FriendRequestID id;
 
 	boolean accepted;
+	boolean show;
 
-	public FriendRequest(String senderEmail, String receiverEmail, boolean accepted) {
+	public FriendRequest(String senderEmail, String receiverEmail, boolean accepted, boolean show) {
 		super();
 		id = new FriendRequestID(senderEmail, receiverEmail);
 
 		this.accepted=accepted;
+		this.show=show;
 	}
 
 	public FriendRequest() {
@@ -37,6 +39,10 @@ public class FriendRequest implements Serializable {
 	}
 	public String getReceiverEmail() {
 		return id.getReceiver();
+	}
+	public boolean isShow() {
+		return show;
+	
 	}
 	
 }
