@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.Embeddable;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 @Embeddable
 public class FriendRequestID implements Serializable{
 	String senderEmail;
