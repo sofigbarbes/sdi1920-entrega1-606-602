@@ -18,8 +18,8 @@ import socialNetwork.utils.SeleniumUtils;
 //Ordenamos las pruebas por el nombre del método
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class NotaneitorTests {
-	static String PathFirefox65 = "D:\\PROGRAMAS\\FIREFOX\\FIREFOX\\firefox.exe";
-	static String Geckdriver024 = "D:\\PROGRAMAS\\FIREFOX\\MATERIAL\\geckodriver024win64.exe";
+	static String PathFirefox65 = "D:\\SDI\\FIREFOX\\FIREFOX\\firefox.exe";
+	static String Geckdriver024 = "D:\\SDI\\FIREFOX\\MATERIAL\\geckodriver024win64.exe";
 	static WebDriver driver = getDriver(PathFirefox65, Geckdriver024);
 	static String URL = "http://localhost:8070";
 

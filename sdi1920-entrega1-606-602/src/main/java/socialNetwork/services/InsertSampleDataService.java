@@ -5,7 +5,7 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import socialNetwork.entities.FriendRequest;
+import socialNetwork.entities.Post;
 import socialNetwork.entities.User;
 
 @Service
@@ -16,6 +16,9 @@ public class InsertSampleDataService {
 	@Autowired
 	private FriendRequestService friendReqService;
 
+	@Autowired
+	private PostService postService;
+	
 	@Autowired
 	private RolesService rolesService;
 
@@ -54,6 +57,7 @@ public class InsertSampleDataService {
 		usersService.addUser(user6);
 		usersService.addUser(user7);
 		usersService.addUser(user8);
+		postService.addService(new Post("luci", "2020-03-11", "Hola Marcos", "HOLAA"));
 	}
 	
 }
