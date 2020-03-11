@@ -13,19 +13,35 @@ public class Post {
 	private String date;
 	private String text;
 	private String title;
-	
-	public Post(String fecha, String email, String title, String text) {
+
+	public Post(String email, String fecha, String title, String text) {
 		super();
-		this.date=fecha;
-		this.email=email;
-		this.text=text;
-		this.title=title;
+		this.date = fecha;
+		this.email = email;
+		this.text = text;
+		this.title = title;
 	}
-	
+
 	public Post() {
-		
+
 	}
-	
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
 //	Date date = Calendar.getInstance().getTime();  
 //    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
 //    String strDate = dateFormat.format(date);

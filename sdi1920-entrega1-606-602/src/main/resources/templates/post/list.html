@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head" />
+<body>
+	<!-- Barra de Navegación superior -->
+	<nav th:replace="fragments/nav" />
+	<div class="container">
+		<h2 th:text="#{posts}"></h2>
+		
+		<p th:text="#{posts_message}"></p>
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th th:text="#{email}"></th>
+						<th th:text="#{date}"></th>
+						<th th:text="#{title}"></th>
+						<th th:text="#{text}"></th>
+						<th class="col-md-1"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="post : ${postList}">
+						<td th:text="${post.getEmail()}"></td>
+						<td th:text="${post.getDate()}"></td>
+						<td th:text="${post.getTitle()}"></td>
+						<td th:text="${post.getText()}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<footer th:replace="fragments/pagination"/>
+	</div>
+	<footer th:replace="fragments/footer" />
+</body>
+</html>
