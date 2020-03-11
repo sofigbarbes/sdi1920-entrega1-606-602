@@ -29,13 +29,13 @@
 						<td th:text="${user.email}"></td>
 						<td th:text="${user.name}"></td>
 						<td th:text="${user.lastName}"></td>
-						<td>
-							<div th:if="${friendsList.contains(user)}"><p>Ya agregado</p></div>
+						<td >
+							<div th:if="${friendsList.contains(user)}"><p th:text="#{user.agregado}"></p></div>
 							<div th:if="${!friendsList.contains(user) and !reqsToList.contains(user) and !reqsByList.contains(user)}">
-								<a th:href="${'/user/' + user.email + '/sendfriendreq'}"
+								<a th:id="${user.email + 'Send'}" th:href="${'/user/' + user.email + '/sendfriendreq'}"
 							th:text="#{sendRequest}"></a></div>
-							<div th:if="${reqsToList.contains(user)}"><p>Recibida solicitud de amistad</p></div>
-							<div th:if="${reqsByList.contains(user)}"><p>Solicitud de amistad enviada</p></div>
+							<div th:if="${reqsToList.contains(user)}"><p th:text="#{user.recibida}"></p></div>
+							<div th:if="${reqsByList.contains(user)}"><p th:text="#{user.enviada}"></p></div>
 						</td>
 					</tr>
 				</tbody>
