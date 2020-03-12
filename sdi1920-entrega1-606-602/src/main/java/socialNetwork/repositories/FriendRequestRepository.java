@@ -35,5 +35,8 @@ public interface FriendRequestRepository extends CrudRepository<FriendRequest, S
 	@Query("UPDATE FriendRequest r SET r.accepted=true WHERE r.id.senderEmail=?2 AND r.id.receiverEmail=?1")
 	void acceptRequest2(String sender, String receiver);
 
+	@Query("SELECT r FROM FriendRequest r WHERE r.id.senderEmail=?1 AND r.id.receiverEmail=?2 AND r.accepted=true")
+	FriendRequest areFriends(String me, String email);
+
 	
 }

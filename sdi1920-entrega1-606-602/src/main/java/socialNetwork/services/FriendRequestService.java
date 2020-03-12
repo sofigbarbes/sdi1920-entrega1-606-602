@@ -42,6 +42,14 @@ public class FriendRequestService {
 	}
 
 
+	public boolean areFriends(String me, String email) {
+		if(friendReqRep.areFriends(me, email)!=null) {
+			return true;
+		}
+		return false;
+	}
+
+
 	
 	
 
