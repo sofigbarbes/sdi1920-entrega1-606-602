@@ -16,6 +16,8 @@ public class Post {
 
 	public Post(String email, String fecha, String title, String text) {
 		super();
+		System.out.println(title);
+		System.out.println(text);
 		this.date = fecha;
 		this.email = email;
 		this.text = text;
@@ -40,6 +42,14 @@ public class Post {
 
 	public String getTitle() {
 		return title;
+	}
+
+	public void setDate(String strDate) {
+		this.date=strDate;
+	}
+	
+	public void setEmail(String email) {
+		this.email=email;
 	}
 
 //	Date date = Calendar.getInstance().getTime();  

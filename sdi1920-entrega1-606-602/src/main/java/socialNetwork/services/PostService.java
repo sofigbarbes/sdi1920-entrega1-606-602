@@ -24,7 +24,7 @@ public class PostService {
 		return result;
 	}
 
-	public void addService(Post post) {
+	public void addPost(Post post) {
 		postRepository.save(post);
 	}
 }

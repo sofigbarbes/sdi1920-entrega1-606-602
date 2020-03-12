@@ -62,7 +62,7 @@ public class InsertSampleDataService {
 		usersService.addUser(user7);
 		usersService.addUser(user8);
 		usersService.addUser(user9);
-		postService.addService(new Post("luci", "2020-03-11", "Hola Marcos", "HOLAA"));
+		postService.addPost(new Post("luci", "2020-03-11", "Hola Marcos", "HOLAA"));
 	}
 
 }
