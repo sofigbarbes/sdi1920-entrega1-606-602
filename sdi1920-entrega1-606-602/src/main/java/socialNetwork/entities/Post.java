@@ -12,6 +12,14 @@ public class Post {
 	private String email;
 	private String date;
 	private String text;
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	private String title;
 
 	public Post(String email, String fecha, String title, String text) {
