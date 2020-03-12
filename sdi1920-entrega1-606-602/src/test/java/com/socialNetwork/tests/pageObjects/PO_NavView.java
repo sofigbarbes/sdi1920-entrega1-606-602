@@ -35,6 +35,14 @@ public class PO_NavView extends PO_View {
 		assertTrue(elementos.size() == 1);
 	}
 
+	public static void clickOnHRef(WebDriver driver, String texto) {
+		List<WebElement> elementos = SeleniumUtils.EsperaCargaPagina(driver, "@href", texto, getTimeout());
+		// Tiene que haber un sólo elemento.
+		assertTrue(elementos.size() == 1);
+		// Ahora lo clickamos
+		elementos.get(0).click();
+	}
+
 	/***
 	 * Selecciona el enlace de idioma correspondiente al texto textLanguage
 	 * * @paramdriver: apuntando al navegador abierto actualmente.

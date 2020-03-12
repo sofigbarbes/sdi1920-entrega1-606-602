@@ -67,8 +67,38 @@ public class PO_PrivateView extends PO_NavView {
 		driver.findElement(boton).click();
 	}
 
-	public static void sendFriendRequest(WebDriver driver, String sender, String receiver) {
-		PO_NavView.clickOption(driver, "/user/" + receiver + "/sendfriendreq", "id", receiver + "Send");
+	public static void sendFriendRequest(WebDriver driver, String xPathToSend) {
+		PO_View.checkElement(driver, "text", "Usuarios");
+		PO_NavView.clickOption(driver, "/user/list", "id", "listUsers");
+		PO_PrivateView.checkElementClickIndex(driver, xPathToSend, 0); // XPATH COPIED FROM FIREFOX
+		PO_View.checkElement(driver, "text", "Solicitud enviada");
+	}
+
+	public static void acceptRequest(WebDriver driver, String correoAceptar) {
+		PO_PrivateView.checkElementClickIndex(driver, "//li[contains(@id,'friends-menu')]/a", 0);
+
+		PO_PrivateView.checkElementClickIndex(driver, "//a[contains(@href, 'request/list')]", 0);
+		PO_PrivateView.checkElementClickIndex(driver, "//a[contains(@href, 'request/" + correoAceptar + "/accept')]",
+				0);
+
+		PO_PrivateView.checkElementClickIndex(driver, "//li[contains(@id,'listUsers')]/a", 0);
+		PO_View.checkElement(driver, "text", "Ya agregado");
+	}
+
+	public static List<WebElement> getNumberElements(WebDriver driver, String path) {
+		List<WebElement> elementos = PO_View.checkElement(driver, "free", path);
+		return elementos;
+	}
+
+	public static void checkListFriendsContains(WebDriver driver,String string, String string2, String string3) {
+		PO_PrivateView.checkElement(driver, "//*[@id='"+string+"Post"+"']");
+		PO_PrivateView.checkElement(driver, "//*[@id='"+string2+"Post"+"']");
+		PO_PrivateView.checkElement(driver, "//*[@id='"+string3+"Post"+"']");
+
+	}
+
+	private static void checkElement(WebDriver driver, String type) {
+		PO_View.checkElement(driver, "free", type);
 	}
 
 }

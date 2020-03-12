@@ -89,6 +89,9 @@ public class NotaneitorTests {
 		SeleniumUtils.esperarSegundos(driver, 2);
 	}
 
+	/**
+	 * Registro de usuarios con datos válidos
+	 */
 	@Test
 	public void prueba1() {
 		PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary");
@@ -99,6 +102,9 @@ public class NotaneitorTests {
 		PO_View.checkElement(driver, "text", "Bienvenido");
 	}
 
+	/**
+	 * Registro de usuarios con datos inválidos (vacíos)
+	 */
 	@Test
 	public void prueba2() {
 		PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary");
@@ -115,71 +121,82 @@ public class NotaneitorTests {
 
 	}
 
+	/**
+	 * Registro de usuario con datos inválidos (contraseña inválida)
+	 */
 	@Test
 	public void prueba3() {
 		PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary");
 		// Rellenamos el formulario.
-		PO_RegisterView.fillForm(driver, "JosefoEmail", "Josefo", "Perez", "77577", "77777"); // Comprobamos que entramos
+		PO_RegisterView.fillForm(driver, "JosefoEmail", "Josefo", "Perez", "77577", "77777"); // Comprobamos que
+																								// entramos
 		PO_View.checkElement(driver, "text", "Regístrate");
 		PO_RegisterView.checkKey(driver, "Error.signup.passwordConfirm.coincidence", PO_Properties.getSPANISH());
 
 	}
+
+	/**
+	 * Registro de usuario con datos inválidos (email existente)
+	 */
 	@Test
 	public void prueba4() {
 		PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary"); // Rellenamos el formulario.
 		PO_RegisterView.fillForm(driver, "lucasnuñez@correo.com", "Josefo", "Perez", "77777", "77777");
 		PO_View.getP();
 		PO_RegisterView.checkKey(driver, "Error.signup.email.duplicate", PO_Properties.getSPANISH()); // Rellenamos el
-		
+
 	}
-	
-	/*
+
+	/**
 	 * Inicio sesión con datos válidos (administrador)
 	 */
 	@Test
 	public void prueba5() {
 		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary"); // Rellenamos el formulario.
-		PO_LoginView.fillForm(driver, "admin@email.com","admin");
+		PO_LoginView.fillForm(driver, "admin@email.com", "admin");
 		PO_View.checkElement(driver, "text", "Bienvenido");
 
 	}
-	
-	/*
+
+	/**
 	 * Inicio sesión con datos válidos (estándar)
 	 */
 	@Test
 	public void prueba6() {
 		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary"); // Rellenamos el formulario.
-		PO_LoginView.fillForm(driver, "lucasnuñez@correo.com","123456");
+		PO_LoginView.fillForm(driver, "lucasnuñez@correo.com", "123456");
 		PO_View.checkElement(driver, "text", "Bienvenido");
 
 	}
 
-	/*
-	 *Inicio de sesión con datos inválidos (vacíos)
+	/**
+	 * Inicio de sesión con datos inválidos (vacíos)
 	 */
 	@Test
 	public void prueba7() {
 		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary"); // Rellenamos el formulario.
-		PO_LoginView.fillForm(driver, "","123456");
+		PO_LoginView.fillForm(driver, "", "123456");
 		PO_View.checkElement(driver, "text", "Contraseña");
-		PO_LoginView.fillForm(driver, "lucasnuñez@correo.com","");
+		PO_LoginView.fillForm(driver, "lucasnuñez@correo.com", "");
 		PO_View.checkElement(driver, "text", "Contraseña");
 
 	}
-	
-	
-	/*
-	 *Inicio de sesión con datos válidos pero contraña vacía
+
+	/**
+	 * Inicio de sesión con datos válidos pero contraña incorrecta
 	 */
 	@Test
 	public void prueba8() {
 		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary"); // Rellenamos el formulario.
-		PO_LoginView.fillForm(driver, "lucasnuñez@correo.com","");
+		PO_LoginView.fillForm(driver, "lucasnuñez@correo.com", "cxzcz");
 		PO_View.checkElement(driver, "text", "Contraseña");
+		PO_RegisterView.checkKey(driver, "Error.login", PO_Properties.getSPANISH());
 
 	}
 
+	/**
+	 * Salir de sesión y redirigir a login
+	 */
 	@Test
 	public void prueba9() {
 		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary"); // Rellenamos el formulario
@@ -188,22 +205,107 @@ public class NotaneitorTests {
 		PO_HomeView.clickOption(driver, "logout", "class", "btn btn-primary");
 		PO_View.checkElement(driver, "text", "Contraseña");
 
-	}	
+	}
 
+	/**
+	 * Comprobar que el desconectar solo sale cuando el usuario está en sesión
+	 */
 	@Test
 	public void prueba10() {
 		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary"); // Rellenamos el formulario
-		PO_LoginView.fillForm(driver, "lucasnuñez@correo.com", "123456"); // COmprobamos que entramos en la pagina privada de Alumno
-		PO_View.checkElement(driver, "text", "Usuarios");
-		PO_NavView.clickOption(driver, "/user/list", "id", "listUsers");
+		PO_LoginView.fillForm(driver, "sofi", "123456");
+		SeleniumUtils.textoNoPresentePagina(driver, "Desconectar");
+	}
 
-		PO_PrivateView.checkElementClickIndex(driver, "/html/body/div/div[1]/table/tbody/tr[1]/td[4]/div/a", 0); //XPATH COPIED FROM FIREFOX
-		PO_View.checkElement(driver, "text", "Solicitud enviada");
+	/**
+	 * aceptar una solicitud que se ha recibido
+	 */
+	@Test
+	public void prueba18() {
+
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_LoginView.fillForm(driver, "lucasnuñez@correo.com", "123456");
+
+		PO_PrivateView.sendFriendRequest(driver, "/html/body/div/div[1]/table/tbody/tr[1]/td[4]/div/a");
 
 		PO_HomeView.clickOption(driver, "logout", "class", "btn btn-primary");
 		PO_View.checkElement(driver, "text", "Contraseña");
 
+		PO_LoginView.fillForm(driver, "mariarodriguez@correo.com", "123456");
 
+		PO_PrivateView.acceptRequest(driver, "lucasnuñez@correo.com");
+
+	}
+
+	/**
+	 * Mostrar el listado de amigos de un usuario. Comprobar que el listado contiene
+	 * los amigos que deben ser.
+	 */
+	@Test
+	public void prueba19() {
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_LoginView.fillForm(driver, "lucasnuñez@correo.com", "123456");
+
+		PO_PrivateView.sendFriendRequest(driver, "/html/body/div/div[1]/table/tbody/tr[2]/td[4]/div/a"); // martaalmonte
+
+		PO_PrivateView.sendFriendRequest(driver, "/html/body/div/div[1]/table/tbody/tr[3]/td[4]/div/a"); // pelayovaldes
+
+		PO_PrivateView.sendFriendRequest(driver, "/html/body/div/div[1]/table/tbody/tr[4]/td[4]/div/a"); // edwardnuñez
+
+		PO_HomeView.clickOption(driver, "logout", "class", "btn btn-primary");
+		PO_View.checkElement(driver, "text", "Contraseña");
+
+		PO_LoginView.fillForm(driver, "martaalmonte@correo.com", "123456");
+		PO_PrivateView.acceptRequest(driver, "lucasnuñez@correo.com");
+		PO_HomeView.clickOption(driver, "logout", "class", "btn btn-primary");
+		PO_View.checkElement(driver, "text", "Contraseña");
+
+		PO_LoginView.fillForm(driver, "pelayovaldes@correo.com", "123456");
+		PO_PrivateView.acceptRequest(driver, "lucasnuñez@correo.com");
+		PO_HomeView.clickOption(driver, "logout", "class", "btn btn-primary");
+		PO_View.checkElement(driver, "text", "Contraseña");
+
+		PO_LoginView.fillForm(driver, "edwardnuñez@correo.com", "123456");
+		PO_PrivateView.acceptRequest(driver, "lucasnuñez@correo.com");
+		PO_HomeView.clickOption(driver, "logout", "class", "btn btn-primary");
+		PO_View.checkElement(driver, "text", "Contraseña");
+
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_LoginView.fillForm(driver, "lucasnuñez@correo.com", "123456");
+
+		PO_PrivateView.checkElementClickIndex(driver, "//li[contains(@id,'friends-menu')]/a", 0);
+		PO_PrivateView.checkElementClickIndex(driver, "//a[contains(@href, '/friendRequest/listAccepted')]", 0);
+
+		PO_PrivateView.checkListFriendsContains(driver, "martaalmonte@correo.com", "pelayovaldes@correo.com",
+				"edwardnuñez@correo.com");
+
+	}
+
+	/**
+	 * Visualizar al menos cuatro páginas en Español/Inglés/Español (comprobando que
+	 * algunas de las etiquetas cambian al idioma correspondiente).
+	 */
+	@Test
+	public void prueba20() {
+		PO_HomeView.checkWelcome(driver, PO_Properties.getSPANISH());
+
+		PO_HomeView.checkChangeIdiom(driver, "btnSpanish", "btnEnglish", PO_Properties.getSPANISH(),
+				PO_Properties.getENGLISH()); //
+		SeleniumUtils.esperarSegundos(driver, 2);
+
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_LoginView.fillForm(driver, "lucasnuñez@correo.com", "123456");
+
+		PO_HomeView.changeIdiom(driver, "btnSpanish");
+
+		PO_View.checkElement(driver, "text", "Usuarios");
+		PO_NavView.clickOption(driver, "/user/list", "id", "listUsers");
+		PO_View.checkElement(driver, "text", "Usuarios");
+
+		PO_HomeView.changeIdiom(driver, "btnEnglish");
+		PO_View.checkElement(driver, "text", "Users");
+		PO_NavView.clickOption(driver, "/user/list", "id", "listUsers");
+		PO_View.checkElement(driver, "text", "Users");
 
 	}
 
