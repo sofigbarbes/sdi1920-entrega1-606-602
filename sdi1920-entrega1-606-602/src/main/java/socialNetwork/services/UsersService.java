@@ -78,4 +78,14 @@ public class UsersService {
 	public Page<User> getReqByUser(Pageable pageable, String email) {
 		return usersRepository.findRequestByUser(pageable, email);
 	}
+
+	public Page<User> getListUsersAdmin(Pageable pageable, String email) {
+		Page<User> users = usersRepository.listUsersAdmin(pageable, email);
+		return users;
+	}
+
+	public void deleteUserByEmail(String email) {
+		usersRepository.deleteByEmail(email);
+		
+	}
 }

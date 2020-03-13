@@ -49,6 +49,9 @@ public class FriendRequestService {
 		return false;
 	}
 
+	public void deleteRequestsUser(String email) {
+		friendReqRep.deleteByEmail(email);
+	}
 
 	
 	

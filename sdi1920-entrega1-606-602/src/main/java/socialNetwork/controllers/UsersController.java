@@ -1,7 +1,10 @@
 
 package socialNetwork.controllers;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -85,13 +88,17 @@ public class UsersController {
 		if (searchText != null && !searchText.isEmpty()) {
 			users = usersService.searchUser(pageable, searchText, email);
 		} else {
-			users = usersService.getListUsers(pageable, email);
+			if (!usersService.getUserByEmail(email).getRole().equals("ROLE_ADMIN")) {
+				users = usersService.getListUsers(pageable, email);
+			} else {
+				users = usersService.getListUsersAdmin(pageable, email);
+			}
 		}
-		
+
 		Page<User> friends = usersService.getFriends(pageable, email);
 		Page<User> reqsTo = usersService.getReqToUser(pageable, email);
 		Page<User> reqsBy = usersService.getReqByUser(pageable, email);
-		
+
 		model.addAttribute("usersList", users.getContent());
 		model.addAttribute("friendsList", friends.getContent());
 		model.addAttribute("reqsToList", reqsTo.getContent());
@@ -104,18 +111,56 @@ public class UsersController {
 	public String setResendTrue(Model model, @PathVariable String email) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String senderEmail = auth.getName();
-		
+
 		User user = usersService.getUserByEmail(email);
-		
-		if(!user.getRole().equals("ROLE_ADMIN")) {
+
+		if (!user.getRole().equals("ROLE_ADMIN")) {
 			FriendRequest fr = new FriendRequest(senderEmail, email, false, true);
 			friendRequestService.addFriendRequest(fr);
-			
+
 			FriendRequest fr2 = new FriendRequest(email, senderEmail, false, false);
 			friendRequestService.addFriendRequest(fr2);
 		}
-	
-		
+
 		return "redirect:/user/list";
 	}
+
+	@RequestMapping(value = "/user/delete/{email}")
+	public String delete(@PathVariable String email) {
+		usersService.deleteUserByEmail(email);
+		friendRequestService.deleteRequestsUser(email);
+
+		return "redirect:/user/list";
+	}
+
+	@RequestMapping(value = "/user/delete", method = RequestMethod.POST)
+	public String deleteUsers(Model model, @RequestParam Map<String, Object> paramList) {
+		List<String> emails = readEmailsFromRequest(paramList);
+		for (String email : emails) {
+			usersService.deleteUserByEmail(email);
+			friendRequestService.deleteRequestsUser(email);
+		}
+		return "redirect:/user/list";
+	}
+
+	private List<String> readEmailsFromRequest(Map<String, Object> paramList) {
+		List<String> keySet = new ArrayList<String>(paramList.keySet());
+		List<String> values = new ArrayList<String>();
+		String str = "";
+		for (String key : keySet) {
+			values.add(key);
+			str = key;
+		}
+		String[] v = str.split(":");
+		v = v[1].substring(1, v[1].length()).substring(0, v[1].length() - 3).split(",");
+		List<String> emails = new ArrayList<String>();
+		for (String each : v) {
+			emails.add(each.substring(1, each.length() - 1));
+			System.out.println(each.substring(1, each.length() - 1));
+
+		}
+		return emails;
+
+	}
+
 }

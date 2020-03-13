@@ -54,6 +54,14 @@ public class InsertSampleDataService {
 		user9.setPassword("admin");
 		user9.setRole(rolesService.getRoles()[1]);
 
+		User user10 = new User("admin2@email.com", "admin", "admin");
+		user10.setPassword("admin");
+		user10.setRole(rolesService.getRoles()[1]);
+
+		User user11 = new User("admin3@email.com", "admin", "admin");
+		user11.setPassword("admin");
+		user11.setRole(rolesService.getRoles()[1]);
+
 		usersService.addUser(user1);
 		usersService.addUser(user2);
 		usersService.addUser(user3);
@@ -63,6 +71,8 @@ public class InsertSampleDataService {
 		usersService.addUser(user7);
 		usersService.addUser(user8);
 		usersService.addUser(user9);
+		usersService.addUser(user10);
+		usersService.addUser(user11);
 		
 		friendReqService.addFriendRequest(new FriendRequest("luci", "sofi", true, false));
 		friendReqService.addFriendRequest(new FriendRequest("sofi", "luci", true, true));

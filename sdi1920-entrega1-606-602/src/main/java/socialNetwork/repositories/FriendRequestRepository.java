@@ -37,6 +37,11 @@ public interface FriendRequestRepository extends CrudRepository<FriendRequest, S
 
 	@Query("SELECT r FROM FriendRequest r WHERE r.id.senderEmail=?1 AND r.id.receiverEmail=?2 AND r.accepted=true")
 	FriendRequest areFriends(String me, String email);
+	
+	@Transactional
+	@Modifying
+	@Query("DELETE FROM FriendRequest r WHERE r.id.senderEmail=?1 OR r.id.receiverEmail=?1 ")
+	void deleteByEmail(String email);
 
 	
 }
