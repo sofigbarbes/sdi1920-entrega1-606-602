@@ -16,8 +16,7 @@
 
 				<li id="friends-menu" class="dropdown"><a
 					class="dropdown-toggle" data-toggle="dropdown" href="#"
-					th:text="#{manage.friends.message}"> Gestión de amigos <span
-						class="caret"></span>
+					th:text="#{manage.friends.message}"><span class="caret"></span>
 				</a>
 					<ul class="dropdown-menu">
 						<li><a href="/friendRequest/listAccepted"
@@ -27,14 +26,16 @@
 
 				<li id="posts-menu" class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#" th:text="#{manage.posts.message}">
-						Gestión de publicaciones <span class="caret"></span>
+						<span class="caret"></span>
 				</a>
 					<ul class="dropdown-menu">
 						<li><a href="/post/list" th:text="#{posts}"></a></li>
 						<li><a href="/post/add" th:text="#{addPost}"></a></li>
 					</ul></li>
-					
+
 			</ul>
+
+
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown"><a id="btnLanguage" href="#"
 					class="dropdown-toggle" data-toggle="dropdown" role="button"

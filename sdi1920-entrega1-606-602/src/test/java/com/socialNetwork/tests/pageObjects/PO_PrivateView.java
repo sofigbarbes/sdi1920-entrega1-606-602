@@ -69,7 +69,7 @@ public class PO_PrivateView extends PO_NavView {
 
 	public static void sendFriendRequest(WebDriver driver, String xPathToSend) {
 		PO_View.checkElement(driver, "text", "Usuarios");
-		PO_NavView.clickOption(driver, "/user/list", "id", "listUsers");
+		PO_NavView.clickOption(driver, "/user/list", "id", "listUsersTable");
 		PO_PrivateView.checkElementClickIndex(driver, xPathToSend, 0); // XPATH COPIED FROM FIREFOX
 		PO_View.checkElement(driver, "text", "Solicitud enviada");
 	}
@@ -90,15 +90,25 @@ public class PO_PrivateView extends PO_NavView {
 		return elementos;
 	}
 
-	public static void checkListFriendsContains(WebDriver driver,String string, String string2, String string3) {
-		PO_PrivateView.checkElement(driver, "//*[@id='"+string+"Post"+"']");
-		PO_PrivateView.checkElement(driver, "//*[@id='"+string2+"Post"+"']");
-		PO_PrivateView.checkElement(driver, "//*[@id='"+string3+"Post"+"']");
+	public static void checkListFriendsContains(WebDriver driver, String... string) {
+		for (String s : string) {
+			checkElement(driver, "//*[@id='" + s + "']");
+		}
 
 	}
 
 	private static void checkElement(WebDriver driver, String type) {
 		PO_View.checkElement(driver, "free", type);
+	}
+	public static void deleteUser(WebDriver driver, String string) {
+		clickOnHRef(driver, "/user/delete/"+string); //primero de la lista
+	}
+	public static void deleteUsers(WebDriver driver, String... emails) {
+		for (String s : emails) {
+			checkElementClickIndex(driver, "//*[@id='" + s + "']",0);
+		}
+		checkElementClickIndex(driver,"//*[@id=\"deleteAll\"]",0);
+		
 	}
 
 }

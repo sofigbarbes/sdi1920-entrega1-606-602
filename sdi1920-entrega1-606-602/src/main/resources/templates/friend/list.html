@@ -24,7 +24,7 @@
 						<td th:text="${req.getName()}"></td>
 						<td th:text="${req.getLastName()}"></td>
 						<td >
-							<a th:id="${req.getEmail() + 'Post'}" th:href="${req.getEmail() + '/posts'}" 
+							<a th:id="${req.getEmail()}" th:href="${req.getEmail() + '/posts'}" 
 							th:text="#{friendsPost}"></a>
 						</td>
 					</tr>

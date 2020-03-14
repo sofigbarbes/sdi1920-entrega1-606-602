@@ -1,10 +1,16 @@
 package socialNetwork.controllers;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
+
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,7 +33,7 @@ import socialNetwork.services.PostService;
 public class PostController {
 	@Autowired
 	public PostService postService;
-	
+
 	@Autowired
 	public FriendRequestService friendReqServ;
 
@@ -77,7 +83,7 @@ public class PostController {
 
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String me = auth.getName();
-		
+
 		Page<Post> posts = new PageImpl<Post>(new LinkedList<Post>());
 		if (friendReqServ.areFriends(me, email)) {
 			posts = postService.getPostsByUser(pageable, email);
@@ -90,4 +96,5 @@ public class PostController {
 		}
 
 	}
+	
 }

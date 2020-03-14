@@ -60,4 +60,16 @@ public class PO_NavView extends PO_View {
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", textLanguage, getTimeout());
 		elementos.get(0).click();
 	}
+
+	/**
+	 * Navigate to the page specified as a parameter. Pages start at index 0
+	 * 
+	 * @paramdriver: navegador
+	 * @parampage page you want to go
+	 */
+	public static void goToPage(WebDriver driver, String page) {
+		List<WebElement> elementos = SeleniumUtils.EsperaCargaPagina(driver, "@href", "?page=" + page, getTimeout());
+		elementos.get(0).click();
+
+	}
 }

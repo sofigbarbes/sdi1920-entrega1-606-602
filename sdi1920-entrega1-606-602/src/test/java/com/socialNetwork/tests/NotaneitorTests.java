@@ -86,7 +86,6 @@ public class NotaneitorTests {
 	public void PR04() {
 		PO_HomeView.checkChangeIdiom(driver, "btnSpanish", "btnEnglish", PO_Properties.getSPANISH(),
 				PO_Properties.getENGLISH()); //
-		SeleniumUtils.esperarSegundos(driver, 2);
 	}
 
 	/**
@@ -291,7 +290,6 @@ public class NotaneitorTests {
 
 		PO_HomeView.checkChangeIdiom(driver, "btnSpanish", "btnEnglish", PO_Properties.getSPANISH(),
 				PO_Properties.getENGLISH()); //
-		SeleniumUtils.esperarSegundos(driver, 2);
 
 		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "lucasnuñez@correo.com", "123456");
@@ -299,13 +297,93 @@ public class NotaneitorTests {
 		PO_HomeView.changeIdiom(driver, "btnSpanish");
 
 		PO_View.checkElement(driver, "text", "Usuarios");
-		PO_NavView.clickOption(driver, "/user/list", "id", "listUsers");
+		PO_NavView.clickOption(driver, "/user/list", "id", "listUsersTable");
 		PO_View.checkElement(driver, "text", "Usuarios");
 
 		PO_HomeView.changeIdiom(driver, "btnEnglish");
 		PO_View.checkElement(driver, "text", "Users");
-		PO_NavView.clickOption(driver, "/user/list", "id", "listUsers");
+		PO_NavView.clickOption(driver, "/user/list", "id", "listUsersTable");
 		PO_View.checkElement(driver, "text", "Users");
+
+	}
+
+	/**
+	 * Comprobar que al entrar como usuario, se listan todos los usuarios existentes
+	 * menos él mismo
+	 */
+	@Test
+	public void prueba31() {
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary"); // Rellenamos el formulario.
+		PO_LoginView.fillForm(driver, "admin@email.com", "admin");
+		PO_View.checkElement(driver, "text", "Bienvenido");
+		PO_View.checkElement(driver, "text", "Usuarios");
+		PO_NavView.clickOption(driver, "/user/list", "id", "listUsersTable");
+		PO_View.checkElement(driver, "text", "Usuarios");
+		PO_PrivateView.checkListFriendsContains(driver, "martaalmonte@correo.com", "pelayovaldes@correo.com",
+				"lucasnuñez@correo.com");
+		PO_NavView.goToPage(driver, "1");
+		PO_PrivateView.checkListFriendsContains(driver, "sofi", "luci", "admin2@email.com");
+
+	}
+
+	/**
+	 * Ir a la lista de usuarios, borrar el primer usuario de la lista, comprobar
+	 * que la lista se actualiza y dicho usuario desaparece.
+	 * 
+	 */
+	@Test
+	public void prueba32() {
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary"); // Rellenamos el formulario.
+		PO_LoginView.fillForm(driver, "admin@email.com", "admin");
+		PO_View.checkElement(driver, "text", "Bienvenido");
+		PO_View.checkElement(driver, "text", "Usuarios");
+		PO_NavView.clickOption(driver, "/user/list", "id", "listUsersTable");
+		PO_View.checkElement(driver, "text", "Usuarios");
+		PO_PrivateView.deleteUser(driver, "pedrodiaz@correo.com");
+		SeleniumUtils.textoNoPresentePagina(driver, "pedrodiaz@correo.com");
+
+	}
+
+	/**
+	 * Ir a la lista de usuarios, borrar el último usuario de la lista, comprobar
+	 * que la lista se actualiza y dicho usuario desaparece.
+	 * 
+	 */
+	@Test
+	public void prueba33() {
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary"); // Rellenamos el formulario.
+		PO_LoginView.fillForm(driver, "admin@email.com", "admin");
+		PO_View.checkElement(driver, "text", "Bienvenido");
+		PO_View.checkElement(driver, "text", "Usuarios");
+		PO_NavView.clickOption(driver, "/user/list", "id", "listUsersTable");
+		PO_View.checkElement(driver, "text", "Usuarios");
+		PO_NavView.goToPage(driver, "1");
+
+		PO_PrivateView.deleteUser(driver, "admin3@email.com");
+		SeleniumUtils.textoNoPresentePagina(driver, "admin3@email.com");
+
+	}
+
+	/**
+	 * Ir a la lista de usuarios, borrar 3 usuarios, comprobar que la lista se
+	 * actualiza y dichos usuarios desaparecen.
+	 * 
+	 */
+	@Test
+	public void prueba34() {
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary"); // Rellenamos el formulario.
+		PO_LoginView.fillForm(driver, "admin@email.com", "admin");
+		PO_View.checkElement(driver, "text", "Bienvenido");
+		PO_View.checkElement(driver, "text", "Usuarios");
+		PO_NavView.clickOption(driver, "/user/list", "id", "listUsersTable");
+		PO_View.checkElement(driver, "text", "Usuarios");
+		PO_PrivateView.deleteUsers(driver, "pelayovaldes@correo.com", "martaalmonte@correo.com",
+				"mariarodriguez@correo.com");
+		PO_View.checkElement(driver, "text", "Usuarios");
+		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "pedrodiaz@correo.com", PO_View.getTimeout());
+		SeleniumUtils.textoNoPresentePagina(driver, "pedrodiaz@correo.com");
+		SeleniumUtils.textoNoPresentePagina(driver, "martaalmonte@correo.com");
+		SeleniumUtils.textoNoPresentePagina(driver, "mariarodriguez@correo.com");
 
 	}
 

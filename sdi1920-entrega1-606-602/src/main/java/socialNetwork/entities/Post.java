@@ -12,6 +12,15 @@ public class Post {
 	private String email;
 	private String date;
 	private String text;
+	private String imgPath;
+	public String getImgPath() {
+		return imgPath;
+	}
+
+	public void setImgPath(String imgPath) {
+		this.imgPath = imgPath;
+	}
+
 	public void setText(String text) {
 		this.text = text;
 	}
