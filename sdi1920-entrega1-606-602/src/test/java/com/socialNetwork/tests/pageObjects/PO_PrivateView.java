@@ -110,5 +110,24 @@ public class PO_PrivateView extends PO_NavView {
 		checkElementClickIndex(driver,"//*[@id=\"deleteAll\"]",0);
 		
 	}
+	
+	public static void añadirPublicacionSinFoto(WebDriver driver, String title, String text) {
+		WebElement titlew = driver.findElement(By.name("title"));
+		titlew.clear();
+		titlew.sendKeys(title);
+		WebElement score = driver.findElement(By.name("text"));
+		score.click();
+		score.clear();
+		score.sendKeys(text);
+		By boton = By.className("btn");
+		driver.findElement(boton).click();
+	}
+
+	public static void añadirPublicacionConFoto(WebDriver driver, String title, String text, String path) {
+		WebElement elem = driver.findElement(By.xpath("//input[@type='file']"));
+		elem.sendKeys(path);
+		
+		añadirPublicacionSinFoto(driver, title, text);
+	}
 
 }

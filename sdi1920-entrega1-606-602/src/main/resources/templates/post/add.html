@@ -5,7 +5,7 @@
 	<!-- Barra de Navegación superior -->
 	<nav th:replace="fragments/nav" />
 	<div class="container">
-		<h2 th:text="#{addPost}"></h2>
+		<h2 id="addPost" th:text="#{addPost}"></h2>
 		<form class="form-horizontal" method="post" action="/post/add" enctype="multipart/form-data"
 			th:object="${post}">
 			<div class="form-group">
@@ -25,7 +25,7 @@
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="pic" th:text="#{choosePicture}"></label>
 				<div class="col-sm-10">
-					<input type='file' name="yourImage" accept=".png, .jpeg"/> 
+					<input type='file' name="yourImage" accept=".png, .jpeg, .jpg"/> 
 					
 				</div>
 			</div>

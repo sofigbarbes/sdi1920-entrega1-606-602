@@ -7,7 +7,9 @@ import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import com.socialNetwork.tests.pageObjects.PO_HomeView;
@@ -60,30 +62,15 @@ public class NotaneitorTests {
 	}
 
 	@Test
-	public void PR01() {
+	public void pruebaInicio() {
 		PO_HomeView.checkWelcome(driver, PO_Properties.getSPANISH());
-	}
-
-	// PR02. OPción de navegación. Pinchar en el enlace Registro en la página home
-
-	@Test
-	public void PR02() {
-		PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary");
-	}
-
-	// PR03. OPción de navegación. Pinchar en el enlace Identificate en la página
-	// home
-
-	@Test
-	public void PR03() {
-		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
 	}
 
 	// PR04. OPción de navegación. Cambio de idioma de Español a Ingles y vuelta
 	// Español
 
 	@Test
-	public void PR04() {
+	public void pruebaIdioma() {
 		PO_HomeView.checkChangeIdiom(driver, "btnSpanish", "btnEnglish", PO_Properties.getSPANISH(),
 				PO_Properties.getENGLISH()); //
 	}
@@ -304,6 +291,38 @@ public class NotaneitorTests {
 		PO_View.checkElement(driver, "text", "Users");
 		PO_NavView.clickOption(driver, "/user/list", "id", "listUsersTable");
 		PO_View.checkElement(driver, "text", "Users");
+
+	}
+
+	/**
+	 * Probar publicación con foto
+	 */
+	@Test
+	public void prueba29() {
+
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_LoginView.fillForm(driver, "lucasnuñez@correo.com", "123456");
+		PO_PrivateView.checkElementClickIndex(driver, "//li[contains(@id,'posts-menu')]/a", 0);
+		PO_PrivateView.checkElementClickIndex(driver, "//a[contains(@href, '/post/add')]", 0);
+		PO_PrivateView.añadirPublicacionConFoto(driver, "hola", "Sofia", "D:\\Usuarios\\Sofia\\fondo.jpg");
+		PO_View.checkElement(driver, "text", "publicaciones");
+		SeleniumUtils.EsperaCargaPagina(driver, "text", "Multimedia", PO_View.getTimeout());
+
+	}
+
+	/**
+	 * Probar publicación sin foto
+	 */
+	@Test
+	public void prueba30() {
+
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_LoginView.fillForm(driver, "sofi", "123456");
+		PO_PrivateView.checkElementClickIndex(driver, "//li[contains(@id,'posts-menu')]/a", 0);
+		PO_PrivateView.checkElementClickIndex(driver, "//a[contains(@href, '/post/add')]", 0);
+
+		PO_PrivateView.añadirPublicacionSinFoto(driver, "hola", "Sofia");
+		PO_View.checkElement(driver, "text", "publicaciones");
 
 	}
 
