@@ -1,5 +1,9 @@
 package com.socialNetwork.tests;
 
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -7,7 +11,6 @@ import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -60,9 +63,11 @@ public class NotaneitorTests {
 		// Cerramos el navegador al finalizar las pruebas
 		driver.quit();
 	}
+	
+	
 
 	@Test
-	public void pruebaInicio() {
+	public void _pruebaInicio() {
 		PO_HomeView.checkWelcome(driver, PO_Properties.getSPANISH());
 	}
  
@@ -70,7 +75,7 @@ public class NotaneitorTests {
 	// Español
 
 	@Test
-	public void pruebaIdioma() {
+	public void _pruebaIdioma() {
 		PO_HomeView.checkChangeIdiom(driver, "btnSpanish", "btnEnglish", PO_Properties.getSPANISH(),
 				PO_Properties.getENGLISH()); //
 	}
@@ -79,7 +84,7 @@ public class NotaneitorTests {
 	 * Registro de usuarios con datos válidos
 	 */
 	@Test
-	public void prueba1() {
+	public void prueba01() {
 		PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary");
 		// Rellenamos el formulario.
 		PO_RegisterView.fillForm(driver, "josesfoEmail", "Josefo", "Perez", "77777", "77777"); // Comprobamos que
@@ -92,7 +97,7 @@ public class NotaneitorTests {
 	 * Registro de usuarios con datos inválidos (vacíos)
 	 */
 	@Test
-	public void prueba2() {
+	public void prueba02() {
 		PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary");
 		// Rellenamos el formulario.
 		PO_RegisterView.fillForm(driver, "", "Josefo", "Perez", "77777", "77777"); // Comprobamos que entramos
@@ -111,7 +116,7 @@ public class NotaneitorTests {
 	 * Registro de usuario con datos inválidos (contraseña inválida)
 	 */
 	@Test
-	public void prueba3() {
+	public void prueba03() {
 		PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary");
 		// Rellenamos el formulario.
 		PO_RegisterView.fillForm(driver, "JosefoEmail", "Josefo", "Perez", "77577", "77777"); // Comprobamos que
@@ -125,7 +130,7 @@ public class NotaneitorTests {
 	 * Registro de usuario con datos inválidos (email existente)
 	 */
 	@Test
-	public void prueba4() {
+	public void prueba04() {
 		PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary"); // Rellenamos el formulario.
 		PO_RegisterView.fillForm(driver, "lucasnuñez@correo.com", "Josefo", "Perez", "77777", "77777");
 		PO_View.getP();
@@ -137,7 +142,7 @@ public class NotaneitorTests {
 	 * Inicio sesión con datos válidos (administrador)
 	 */
 	@Test
-	public void prueba5() {
+	public void prueba05() {
 		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary"); // Rellenamos el formulario.
 		PO_LoginView.fillForm(driver, "admin@email.com", "admin");
 		PO_View.checkElement(driver, "text", "Bienvenido");
@@ -148,7 +153,7 @@ public class NotaneitorTests {
 	 * Inicio sesión con datos válidos (estándar)
 	 */
 	@Test
-	public void prueba6() {
+	public void prueba06() {
 		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary"); // Rellenamos el formulario.
 		PO_LoginView.fillForm(driver, "lucasnuñez@correo.com", "123456");
 		PO_View.checkElement(driver, "text", "Bienvenido");
@@ -159,7 +164,7 @@ public class NotaneitorTests {
 	 * Inicio de sesión con datos inválidos (vacíos)
 	 */
 	@Test
-	public void prueba7() {
+	public void prueba07() {
 		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary"); // Rellenamos el formulario.
 		PO_LoginView.fillForm(driver, "", "123456");
 		PO_View.checkElement(driver, "text", "Contraseña");
@@ -172,7 +177,7 @@ public class NotaneitorTests {
 	 * Inicio de sesión con datos válidos pero contraña incorrecta
 	 */
 	@Test
-	public void prueba8() {
+	public void prueba08() {
 		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary"); // Rellenamos el formulario.
 		PO_LoginView.fillForm(driver, "lucasnuñez@correo.com", "cxzcz");
 		PO_View.checkElement(driver, "text", "Contraseña");
@@ -184,7 +189,7 @@ public class NotaneitorTests {
 	 * Salir de sesión y redirigir a login
 	 */
 	@Test
-	public void prueba9() {
+	public void prueba09() {
 		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary"); // Rellenamos el formulario
 		PO_LoginView.fillForm(driver, "sofi", "123456"); // COmprobamos que entramos en la pagina privada de Alumno
 		PO_View.checkElement(driver, "text", "Bienvenido");
@@ -201,6 +206,22 @@ public class NotaneitorTests {
 		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary"); // Rellenamos el formulario
 		PO_LoginView.fillForm(driver, "sofi", "123456");
 		SeleniumUtils.textoNoPresentePagina(driver, "Desconectar");
+	}
+	
+	/**
+	 * Mostrar el listado de usuarios
+	 */
+	@Test
+	public void prueba11() {
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary"); // Rellenamos el formulario
+		PO_LoginView.fillForm(driver, "sofi", "123456");
+		// Contamos el número de filas de notas
+		// Pinchamos en la opción de menu de Usuarios
+		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'listUsers')]/a");
+		elementos.get(0).click();
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",
+				PO_View.getTimeout());
+		assertTrue(elementos.size() ==5);
 	}
 
 	/**
