@@ -6,7 +6,7 @@
 	<nav th:replace="fragments/nav" />
 	<div class="container">
 		<h2 th:text="#{posts}"></h2>
-		
+
 		<p th:text="#{posts_message}"></p>
 		<div class="table-responsive">
 			<table class="table table-hover">
@@ -16,6 +16,7 @@
 						<th th:text="#{date}"></th>
 						<th th:text="#{title}"></th>
 						<th th:text="#{text}"></th>
+						<th>Multimedia</th>
 						<th class="col-md-1"></th>
 					</tr>
 				</thead>
@@ -25,12 +26,14 @@
 						<td th:text="${post.getDate()}"></td>
 						<td th:text="${post.getTitle()}"></td>
 						<td th:text="${post.getText()}"></td>
+						<td th:if="${post.getFileName()!=''}"><img id="yourImage" th:src="${post.getFileName()}"
+							name="yourImage"  height="50" width="50" th:alt="#{refresh}"/></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 		<a href="/post/add" th:text="#{addPost}"></a>
-		<footer th:replace="fragments/pagination"/>
+		<footer th:replace="fragments/pagination" />
 	</div>
 	<footer th:replace="fragments/footer" />
 </body>

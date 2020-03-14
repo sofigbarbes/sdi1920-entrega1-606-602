@@ -12,13 +12,41 @@ public class Post {
 	private String email;
 	private String date;
 	private String text;
-	private String imgPath;
-	public String getImgPath() {
-		return imgPath;
+	private String fileName;
+	private String title;
+
+	public Post(String email, String fecha, String title, String text, String fileName) {
+		super();
+		this.date = fecha;
+		this.email = email;
+		this.text = text;
+		this.title = title;
+		this.fileName = fileName;
 	}
 
-	public void setImgPath(String imgPath) {
-		this.imgPath = imgPath;
+	public Post(String email, String fecha, String title, String text) {
+		super();
+		this.date = fecha;
+		this.email = email;
+		this.text = text;
+		this.title = title;
+
+	}
+
+	public Post() {
+
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
 	public void setText(String text) {
@@ -27,22 +55,6 @@ public class Post {
 
 	public void setTitle(String title) {
 		this.title = title;
-	}
-
-	private String title;
-
-	public Post(String email, String fecha, String title, String text) {
-		super();
-		System.out.println(title);
-		System.out.println(text);
-		this.date = fecha;
-		this.email = email;
-		this.text = text;
-		this.title = title;
-	}
-
-	public Post() {
-
 	}
 
 	public String getEmail() {
@@ -62,11 +74,11 @@ public class Post {
 	}
 
 	public void setDate(String strDate) {
-		this.date=strDate;
+		this.date = strDate;
 	}
-	
+
 	public void setEmail(String email) {
-		this.email=email;
+		this.email = email;
 	}
 
 //	Date date = Calendar.getInstance().getTime();  

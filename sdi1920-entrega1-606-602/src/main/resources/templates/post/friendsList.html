@@ -25,6 +25,8 @@
 						<td th:text="${post.getDate()}"></td>
 						<td th:text="${post.getTitle()}"></td>
 						<td th:text="${post.getText()}"></td>
+						<td th:if="${post.getFileName()!=''}"><img id="yourImage" th:src="${post.getFileName()}"
+							name="yourImage"  height="50" width="50" th:alt="#{refresh}"/></td>
 					</tr>
 				</tbody>
 			</table>
