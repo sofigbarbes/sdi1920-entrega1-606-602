@@ -65,7 +65,7 @@ public class NotaneitorTests {
 	public void pruebaInicio() {
 		PO_HomeView.checkWelcome(driver, PO_Properties.getSPANISH());
 	}
-
+ 
 	// PR04. OPción de navegación. Cambio de idioma de Español a Ingles y vuelta
 	// Español
 
