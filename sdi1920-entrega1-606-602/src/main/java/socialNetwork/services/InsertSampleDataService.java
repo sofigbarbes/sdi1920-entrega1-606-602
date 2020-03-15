@@ -76,7 +76,10 @@ public class InsertSampleDataService {
 		
 		friendReqService.addFriendRequest(new FriendRequest("luci", "sofi", true, false));
 		friendReqService.addFriendRequest(new FriendRequest("sofi", "luci", true, true));
-		//postService.addPost(new Post("luci", "2020-03-11", "Hola Marcos", "HOLAA"));
+		
+		postService.addPost(new Post("luci", "2020-03-11", "My Post", "This is the post"));
+		postService.addPost(new Post("sofi", "2020-03-11", "Her Post", "This is the post"));
+		postService.addPost(new Post("sofi", "2020-03-11", "Her Second Post", "This is the post"));
 	}
 
 }

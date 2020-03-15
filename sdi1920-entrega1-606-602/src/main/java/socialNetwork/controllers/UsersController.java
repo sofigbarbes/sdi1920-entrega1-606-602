@@ -107,7 +107,7 @@ public class UsersController {
 		return "user/list";
 	}
 
-	@RequestMapping(value = "/user/{email}/sendfriendreq", method = RequestMethod.GET)
+	@RequestMapping(value = "/user/sendfriendreq/{email}", method = RequestMethod.GET)
 	public String setResendTrue(Model model, @PathVariable String email) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String senderEmail = auth.getName();

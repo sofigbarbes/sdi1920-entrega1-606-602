@@ -11,6 +11,7 @@ import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -63,8 +64,7 @@ public class NotaneitorTests {
 		// Cerramos el navegador al finalizar las pruebas
 		driver.quit();
 	}
-	
-	
+
 
 	@Test
 	public void _pruebaInicio() {
@@ -219,9 +219,137 @@ public class NotaneitorTests {
 		// Pinchamos en la opción de menu de Usuarios
 		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'listUsers')]/a");
 		elementos.get(0).click();
+		
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",
 				PO_View.getTimeout());
-		assertTrue(elementos.size() ==5);
+		assertTrue(elementos.size() == 5);
+	}
+	
+	/**
+	 * Busqueda vacia
+	 */
+	@Test
+	public void prueba12() {
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary"); // Rellenamos el formulario
+		PO_LoginView.fillForm(driver, "sofi", "123456");
+		// Contamos el número de filas de notas
+		// Pinchamos en la opción de menu de Usuarios
+		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'listUsers')]/a");
+		elementos.get(0).click();
+		
+		WebElement search = driver.findElement(By.name("searchText"));
+		search.click();
+		search.clear();
+		
+		By boton = By.className("btn");
+		driver.findElement(boton).click();
+		
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",
+				PO_View.getTimeout());
+		assertTrue(elementos.size() == 5);
+	}
+	
+	/**
+	 * Busqueda sin resultados
+	 */
+	@Test
+	public void prueba13() {
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary"); // Rellenamos el formulario
+		PO_LoginView.fillForm(driver, "sofi", "123456");
+		// Contamos el número de filas de notas
+		// Pinchamos en la opción de menu de Usuarios
+		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'listUsers')]/a");
+		elementos.get(0).click();
+		
+		WebElement search = driver.findElement(By.name("searchText"));
+		search.click();
+		search.clear();
+		search.sendKeys("nadie");
+		By boton = By.className("btn");
+		driver.findElement(boton).click();
+	}
+	
+	/**
+	 * Busqueda con resultados
+	 */
+	@Test
+	public void prueba14() {
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary"); // Rellenamos el formulario
+		PO_LoginView.fillForm(driver, "sofi", "123456");
+		// Contamos el número de filas de notas
+		// Pinchamos en la opción de menu de Usuarios
+		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'listUsers')]/a");
+		elementos.get(0).click();
+		
+		WebElement search = driver.findElement(By.name("searchText"));
+		search.click();
+		search.clear();
+		search.sendKeys("luci");
+		By boton = By.className("btn");
+		driver.findElement(boton).click();
+		
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",
+				PO_View.getTimeout());
+		assertTrue(elementos.size() == 1);
+	}
+	
+	/**
+	 * Enviar una peticion de amistad
+	 */
+	@Test
+	public void prueba15() {
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary"); // Rellenamos el formulario
+		PO_LoginView.fillForm(driver, "sofi", "123456");
+		// Contamos el número de filas de notas
+		// Pinchamos en la opción de menu de Usuarios
+		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'listUsers')]/a");
+		elementos.get(0).click();
+		
+		PO_PrivateView.sendFriendRequest(driver, "/html/body/div/div[1]/table/tbody/tr[1]/td[4]/div/a");
+		PO_View.checkElement(driver, "text", "Solicitud enviada");
+	}
+	
+	/**
+	 * Enviar peticion de amistad a la misma persona dos veces
+	 */
+	@Test
+	public void prueba16() {
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary"); // Rellenamos el formulario
+		PO_LoginView.fillForm(driver, "sofi", "123456");
+		// Contamos el número de filas de notas
+		// Pinchamos en la opción de menu de Usuarios
+		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'listUsers')]/a");
+		elementos.get(0).click();
+		
+		PO_PrivateView.sendFriendRequest(driver, "/html/body/div/div[1]/table/tbody/tr[2]/td[4]/div/a");
+		PO_View.checkElement(driver, "text", "Solicitud enviada");
+	}
+
+	/**
+	 * Mostrar el listado de solicitudes de amistad
+	 */
+	@Test
+	public void prueba17() {
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary"); // Rellenamos el formulario
+		PO_LoginView.fillForm(driver, "lucasnuñez@correo.com", "123456");
+		// Contamos el número de filas de notas
+		// Pinchamos en la opción de menu de Usuarios
+		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'listUsers')]/a");
+		elementos.get(0).click();
+
+		PO_PrivateView.sendFriendRequest(driver, "/html/body/div/div[1]/table/tbody/tr[2]/td[4]/div/a");
+
+		PO_HomeView.clickOption(driver, "logout", "class", "btn btn-primary");
+		PO_LoginView.fillForm(driver, "martaalmonte@correo.com", "123456");
+
+		elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'friends-menu')]/a");
+		elementos.get(0).click();
+
+		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href,'/request/list')]");
+		elementos.get(0).click();
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",
+				PO_View.getTimeout());
+		assertTrue(elementos.size() == 1);
 	}
 
 	/**
@@ -253,17 +381,10 @@ public class NotaneitorTests {
 		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "lucasnuñez@correo.com", "123456");
 
-		PO_PrivateView.sendFriendRequest(driver, "/html/body/div/div[1]/table/tbody/tr[2]/td[4]/div/a"); // martaalmonte
-
 		PO_PrivateView.sendFriendRequest(driver, "/html/body/div/div[1]/table/tbody/tr[3]/td[4]/div/a"); // pelayovaldes
 
 		PO_PrivateView.sendFriendRequest(driver, "/html/body/div/div[1]/table/tbody/tr[4]/td[4]/div/a"); // edwardnuñez
 
-		PO_HomeView.clickOption(driver, "logout", "class", "btn btn-primary");
-		PO_View.checkElement(driver, "text", "Contraseña");
-
-		PO_LoginView.fillForm(driver, "martaalmonte@correo.com", "123456");
-		PO_PrivateView.acceptRequest(driver, "lucasnuñez@correo.com");
 		PO_HomeView.clickOption(driver, "logout", "class", "btn btn-primary");
 		PO_View.checkElement(driver, "text", "Contraseña");
 
@@ -283,7 +404,7 @@ public class NotaneitorTests {
 		PO_PrivateView.checkElementClickIndex(driver, "//li[contains(@id,'friends-menu')]/a", 0);
 		PO_PrivateView.checkElementClickIndex(driver, "//a[contains(@href, '/friendRequest/listAccepted')]", 0);
 
-		PO_PrivateView.checkListFriendsContains(driver, "martaalmonte@correo.com", "pelayovaldes@correo.com",
+		PO_PrivateView.checkListFriendsContains(driver, "pelayovaldes@correo.com",
 				"edwardnuñez@correo.com");
 
 	}
@@ -313,6 +434,114 @@ public class NotaneitorTests {
 		PO_NavView.clickOption(driver, "/user/list", "id", "listUsersTable");
 		PO_View.checkElement(driver, "text", "Users");
 
+	}
+	
+	/**
+	 * No poder acceder al listado de usuarios sin autenticarse
+	 */
+	@Test
+	public void prueba21() {
+		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "Usuarios", PO_View.getTimeout());
+	}
+	
+	/**
+	 * No poder acceder al listado de publicaciones sin autenticarse
+	 */
+	@Test
+	public void prueba22() {
+		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "Menú de Publicaciones", PO_View.getTimeout());
+	}
+	
+	/**
+	 * No poder ver cosas de administrador siendo usuario normal
+	 */
+	@Test
+	public void prueba23() {
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_LoginView.fillForm(driver, "lucasnuñez@correo.com", "123456");
+
+		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "Administrador", PO_View.getTimeout());
+		
+		PO_HomeView.clickOption(driver, "logout", "class", "btn btn-primary");
+
+		PO_LoginView.fillForm(driver, "admin@email.com", "admin");
+		SeleniumUtils.textoPresentePagina(driver, "Administrador");
+	}
+	
+	/**
+	 * Buena publicación
+	 */
+	@Test
+	public void prueba24() {
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_LoginView.fillForm(driver, "lucasnuñez@correo.com", "123456");
+		PO_PrivateView.checkElementClickIndex(driver, "//li[contains(@id,'posts-menu')]/a", 0);
+		PO_PrivateView.checkElementClickIndex(driver, "//a[contains(@href, '/post/add')]", 0);
+		PO_PrivateView.añadirPublicacionSinFoto(driver, "P1", "La publicacion");
+		PO_View.checkElement(driver, "text", "publicaciones");
+		SeleniumUtils.EsperaCargaPagina(driver, "text", "P1", PO_View.getTimeout());
+	}
+	
+	/**
+	 * Mala publicación
+	 */
+	@Test
+	public void prueba25() {
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_LoginView.fillForm(driver, "lucasnuñez@correo.com", "123456");
+		
+		PO_PrivateView.checkElementClickIndex(driver, "//li[contains(@id,'posts-menu')]/a", 0);
+		PO_PrivateView.checkElementClickIndex(driver, "//a[contains(@href, '/post/add')]", 0);
+		PO_PrivateView.añadirPublicacionSinFoto(driver, "", "La publicacion2");
+		
+		PO_PrivateView.checkElementClickIndex(driver, "//li[contains(@id,'posts-menu')]/a", 0);
+		PO_PrivateView.checkElementClickIndex(driver, "//a[contains(@href, '/post/list')]", 0);
+		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "La publicacion2", PO_View.getTimeout());
+	}
+	
+	
+	/**
+	 * Listar publicaciones
+	 */
+	@Test
+	public void prueba26() {
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_LoginView.fillForm(driver, "luci", "123456");
+		
+		PO_PrivateView.checkElementClickIndex(driver, "//li[contains(@id,'posts-menu')]/a", 0);
+		PO_PrivateView.checkElementClickIndex(driver, "//a[contains(@href, '/post/list')]", 0);
+		
+		List<WebElement> elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",
+				PO_View.getTimeout());
+		assertTrue(elementos.size() == 1);
+	}
+	
+	/**
+	 * Listar publicaciones de amigo
+	 */
+	@Test
+	public void prueba27() {
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_LoginView.fillForm(driver, "luci", "123456");
+		
+		driver.get("http://localhost:8070/friendRequest/sofi/posts");
+		
+		List<WebElement> elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",
+				PO_View.getTimeout());
+		assertTrue(elementos.size() == 2);
+	}
+	
+	/**
+	 * Error al listar publicaciones de un no amigo
+	 */
+	@Test
+	public void prueba28() {
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_LoginView.fillForm(driver, "luci", "123456");
+		
+		driver.get("http://localhost:8070/friendRequest/admin@email.com/posts");
+		
+		SeleniumUtils.EsperaCargaPagina(driver, "text", "Error", PO_View.getTimeout());
 	}
 
 	/**
