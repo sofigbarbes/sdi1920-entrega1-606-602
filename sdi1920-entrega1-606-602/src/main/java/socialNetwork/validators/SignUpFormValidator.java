@@ -23,7 +23,7 @@ public class SignUpFormValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		User user = (User) target;
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "Error.empty");
-		//comprobar formato correo
+		
 		if (usersService.getUserByEmail(user.getEmail()) != null) {
 			errors.rejectValue("email", "Error.signup.email.duplicate");
 		}
@@ -34,6 +34,7 @@ public class SignUpFormValidator implements Validator {
 			errors.rejectValue("lastName", "Error.signup.lastName.length");
 		}
 		if (user.getPassword().length() < 5 || user.getPassword().length() > 24) {
+			System.out.println("Hola");
 			errors.rejectValue("password", "Error.signup.password.length");
 		}
 		if (!user.getPasswordConfirm().equals(user.getPassword())) {

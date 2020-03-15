@@ -77,7 +77,7 @@ public class NotaneitorTests {
 	@Test
 	public void _pruebaIdioma() {
 		PO_HomeView.checkChangeIdiom(driver, "btnSpanish", "btnEnglish", PO_Properties.getSPANISH(),
-				PO_Properties.getENGLISH()); //
+				PO_Properties.getENGLISH()); 
 	}
 
 	/**
@@ -87,9 +87,7 @@ public class NotaneitorTests {
 	public void prueba01() {
 		PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary");
 		// Rellenamos el formulario.
-		PO_RegisterView.fillForm(driver, "josesfoEmail", "Josefo", "Perez", "77777", "77777"); // Comprobamos que
-																								// entramos
-																								// en la sección privada
+		PO_RegisterView.fillForm(driver, "josesfoEmail", "Josefo", "Perez", "77777", "77777"); 
 		PO_View.checkElement(driver, "text", "Bienvenido");
 	}
 
