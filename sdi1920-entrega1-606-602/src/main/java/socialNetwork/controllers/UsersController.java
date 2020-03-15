@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import socialNetwork.entities.FriendRequest;
 import socialNetwork.entities.User;
 import socialNetwork.services.FriendRequestService;
+import socialNetwork.services.LoggerService;
 import socialNetwork.services.SecurityService;
 import socialNetwork.services.UsersService;
 import socialNetwork.validators.SignUpFormValidator;
@@ -39,6 +40,9 @@ public class UsersController {
 	@Autowired
 	private SecurityService securityService;
 
+	@Autowired
+	private LoggerService loggerService;
+	
 	@Autowired
 	private SignUpFormValidator signUpFormValidator;
 
@@ -57,6 +61,7 @@ public class UsersController {
 
 		user.setRole("ROLE_STANDARD");
 		usersService.addUser(user);
+		loggerService.signUp(user.getEmail());
 		securityService.autoLogin(user.getEmail(), user.getPasswordConfirm());
 		return "redirect:home";
 	}
@@ -66,6 +71,7 @@ public class UsersController {
 		if (error != null) {
 			model.addAttribute("error", error);
 		}
+		
 		return "login";
 	}
 
@@ -83,6 +89,8 @@ public class UsersController {
 			@RequestParam(value = "", required = false) String searchText) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String email = auth.getName();
+		
+		loggerService.listUsers(email);
 
 		Page<User> users = new PageImpl<User>(new LinkedList<User>());
 		if (searchText != null && !searchText.isEmpty()) {
@@ -111,6 +119,8 @@ public class UsersController {
 	public String setResendTrue(Model model, @PathVariable String email) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String senderEmail = auth.getName();
+		
+		loggerService.sendReq(senderEmail, email);
 
 		User user = usersService.getUserByEmail(email);
 
@@ -129,6 +139,8 @@ public class UsersController {
 	public String delete(@PathVariable String email) {
 		usersService.deleteUserByEmail(email);
 		friendRequestService.deleteRequestsUser(email);
+		
+		loggerService.delete(email);
 
 		return "redirect:/user/list";
 	}

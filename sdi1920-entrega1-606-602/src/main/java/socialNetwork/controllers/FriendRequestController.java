@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import socialNetwork.entities.FriendRequest;
 import socialNetwork.entities.User;
 import socialNetwork.services.FriendRequestService;
+import socialNetwork.services.LoggerService;
 import socialNetwork.services.UsersService;
 
 @Controller
@@ -29,13 +30,17 @@ public class FriendRequestController {
 
 	@Autowired
 	private UsersService usersService;
+	
+	@Autowired
+	private LoggerService loggerService;
 
 	@RequestMapping("/friendRequest/listAccepted")
 	public String getListFriends(Model model, Pageable pageable, Principal principal,
 			@RequestParam(value = "", required = false) String searchText) {
-
 		String email = principal.getName();
 		User user = usersService.getUserByEmail(email);
+		
+		loggerService.listFriends(email);
 
 		Page<User> fr2 = new PageImpl<User>(new LinkedList<User>());
 
@@ -51,6 +56,8 @@ public class FriendRequestController {
 	public String getListRequests(Model model, Pageable pageable) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String email = auth.getName();
+		
+		loggerService.listReqs(email);
 
 		Page<FriendRequest> reqs = new PageImpl<FriendRequest>(new LinkedList<FriendRequest>());
 
@@ -65,6 +72,8 @@ public class FriendRequestController {
 	public String acceptRequest(Model model, @PathVariable String email) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String myEmail = auth.getName();
+		
+		loggerService.acceptReq(myEmail, email);
 
 		friendRequestService.acceptRequest(email, myEmail);
 		return "redirect:/request/list";

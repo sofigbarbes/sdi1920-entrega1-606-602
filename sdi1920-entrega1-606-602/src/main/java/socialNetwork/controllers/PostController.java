@@ -28,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import socialNetwork.entities.Post;
 import socialNetwork.services.FriendRequestService;
+import socialNetwork.services.LoggerService;
 import socialNetwork.services.PostService;
 
 @Controller
@@ -37,12 +38,17 @@ public class PostController {
 
 	@Autowired
 	public FriendRequestService friendReqServ;
+	
+	@Autowired
+	public LoggerService loggerService;
 
 	@RequestMapping("/post/list")
 	public String getListRequests(Model model, Pageable pageable) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String email = auth.getName();
-
+		
+		loggerService.listPost(email);
+		
 		Page<Post> posts = new PageImpl<Post>(new LinkedList<Post>());
 
 		posts = postService.getPostsByUser(pageable, email);
@@ -91,6 +97,8 @@ public class PostController {
 		post.setDate(strDate);
 		post.setEmail(email);
 		postService.addPost(post);
+		
+		loggerService.addPost(email);
 
 		return "redirect:/post/list";
 	}
@@ -106,6 +114,8 @@ public class PostController {
 			posts = postService.getPostsByUser(pageable, email);
 			model.addAttribute("postList", posts.getContent());
 			model.addAttribute("page", posts);
+			
+			loggerService.seeFriendPost(me, email);
 
 			return "post/friendsList";
 		} else {

@@ -16,6 +16,8 @@ public class SecurityService {
 	private AuthenticationManager authenticationManager;
 	@Autowired
 	private UserDetailsService userDetailsService;
+	@Autowired
+	private LoggerService loggerService;
 	private static final Logger logger = LoggerFactory.getLogger(SecurityService.class);
 
 	public String findLoggedInDni() {
@@ -27,6 +29,7 @@ public class SecurityService {
 	}
 
 	public void autoLogin(String dni, String password) {
+		loggerService.logIn(dni);
 		UserDetails userDetails = userDetailsService.loadUserByUsername(dni);
 
 		UsernamePasswordAuthenticationToken aToken = new UsernamePasswordAuthenticationToken(userDetails, password,
