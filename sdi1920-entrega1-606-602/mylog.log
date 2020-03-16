@@ -1,0 +1,102 @@
+2020-03-15 16:34:38.651  INFO 20108 --- [main] s.Sdi1920Entrega1606602Application       : Starting Sdi1920Entrega1606602Application on DESKTOP-PI6HMSR with PID 20108 (C:\Users\blluci\Documents\workspace-sts-3.9.7.RELEASE\maven.1583324833363\sdi1920-entrega1-606-602\target\classes started by blluci in C:\Users\blluci\Documents\workspace-sts-3.9.7.RELEASE\maven.1583324833363\sdi1920-entrega1-606-602)
+2020-03-15 16:34:38.658  INFO 20108 --- [main] s.Sdi1920Entrega1606602Application       : No active profile set, falling back to default profiles: default
+2020-03-15 16:34:40.306  INFO 20108 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2020-03-15 16:34:40.450  INFO 20108 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 122ms. Found 3 JPA repository interfaces.
+2020-03-15 16:34:41.236  INFO 20108 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$EnhancerBySpringCGLIB$$52564050] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-03-15 16:34:41.307  INFO 20108 --- [main] .w.s.a.s.AnnotationActionEndpointMapping : Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+2020-03-15 16:34:41.329  INFO 20108 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-03-15 16:34:42.167  INFO 20108 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8070 (http)
+2020-03-15 16:34:42.181  INFO 20108 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-03-15 16:34:42.182  INFO 20108 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.30]
+2020-03-15 16:34:42.353  INFO 20108 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-03-15 16:34:43.210  INFO 20108 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-03-15 16:34:43.216  WARN 20108 --- [main] com.zaxxer.hikari.util.DriverDataSource  : Registered driver with driverClassName=org.hsqldb.jdbcDriver was not found, trying direct instantiation.
+2020-03-15 16:34:43.564  INFO 20108 --- [main] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Driver does not support get/set network timeout for connections. (característica no soportada)
+2020-03-15 16:34:43.592  INFO 20108 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-03-15 16:34:44.880  INFO 20108 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-03-15 16:34:45.045  WARN 20108 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-03-15 16:34:48.089  INFO 20108 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@16b76858, org.springframework.security.web.context.SecurityContextPersistenceFilter@3e8b8f0, org.springframework.security.web.header.HeaderWriterFilter@4b85edeb, org.springframework.security.web.authentication.logout.LogoutFilter@1a4083f6, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@606d6d2c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1a345298, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3c488b34, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@d3cce46, org.springframework.security.web.session.SessionManagementFilter@59933644, org.springframework.security.web.access.ExceptionTranslationFilter@59baf2c7, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@65e620b0]
+2020-03-15 16:34:48.497  INFO 20108 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-03-15 16:34:48.631  INFO 20108 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-03-15 16:34:48.886  INFO 20108 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8070 (http) with context path ''
+2020-03-15 16:34:48.889  INFO 20108 --- [main] s.Sdi1920Entrega1606602Application       : Started Sdi1920Entrega1606602Application in 10.789 seconds (JVM running for 11.429)
+2020-03-15 16:35:51.518  INFO 20108 --- [http-nio-8070-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-03-15 16:38:34.554 ERROR 20108 --- [http-nio-8070-exec-5] o.a.c.c.C.[Tomcat].[localhost].[/]       : Session event listener threw exception
+
+java.lang.AbstractMethodError: org.apache.tomcat.websocket.server.WsSessionListener.sessionCreated(Ljavax/servlet/http/HttpSessionEvent;)V
+	at org.apache.catalina.session.StandardSession.tellNew(StandardSession.java:388) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.session.StandardSession.setId(StandardSession.java:360) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.session.StandardSession.setId(StandardSession.java:341) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.session.ManagerBase.createSession(ManagerBase.java:686) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.connector.Request.doGetSession(Request.java:3036) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.connector.Request.getSession(Request.java:2432) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.connector.RequestFacade.getSession(RequestFacade.java:908) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at javax.servlet.http.HttpServletRequestWrapper.getSession(HttpServletRequestWrapper.java:270) [selenium-server-standalone-3.141.59.jar:3.1.0]
+	at org.springframework.security.web.context.HttpSessionSecurityContextRepository$SaveToSessionResponseWrapper.createNewSessionIfAllowed(HttpSessionSecurityContextRepository.java:430) [spring-security-web-5.2.1.RELEASE.jar:5.2.1.RELEASE]
+	at org.springframework.security.web.context.HttpSessionSecurityContextRepository$SaveToSessionResponseWrapper.saveContext(HttpSessionSecurityContextRepository.java:363) [spring-security-web-5.2.1.RELEASE.jar:5.2.1.RELEASE]
+	at org.springframework.security.web.context.SaveContextOnUpdateOrErrorResponseWrapper.onResponseCommitted(SaveContextOnUpdateOrErrorResponseWrapper.java:85) [spring-security-web-5.2.1.RELEASE.jar:5.2.1.RELEASE]
+	at org.springframework.security.web.util.OnCommittedResponseWrapper.doOnResponseCommitted(OnCommittedResponseWrapper.java:252) [spring-security-web-5.2.1.RELEASE.jar:5.2.1.RELEASE]
+	at org.springframework.security.web.util.OnCommittedResponseWrapper.sendRedirect(OnCommittedResponseWrapper.java:134) [spring-security-web-5.2.1.RELEASE.jar:5.2.1.RELEASE]
+	at javax.servlet.http.HttpServletResponseWrapper.sendRedirect(HttpServletResponseWrapper.java:176) [selenium-server-standalone-3.141.59.jar:3.1.0]
+	at org.springframework.security.web.util.OnCommittedResponseWrapper.sendRedirect(OnCommittedResponseWrapper.java:135) [spring-security-web-5.2.1.RELEASE.jar:5.2.1.RELEASE]
+	at org.springframework.security.web.DefaultRedirectStrategy.sendRedirect(DefaultRedirectStrategy.java:57) [spring-security-web-5.2.1.RELEASE.jar:5.2.1.RELEASE]
+	at org.springframework.security.web.authentication.AbstractAuthenticationTargetUrlRequestHandler.handle(AbstractAuthenticationTargetUrlRequestHandler.java:91) [spring-security-web-5.2.1.RELEASE.jar:5.2.1.RELEASE]
+	at org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler.onAuthenticationSuccess(SimpleUrlAuthenticationSuccessHandler.java:63) [spring-security-web-5.2.1.RELEASE.jar:5.2.1.RELEASE]
+	at org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler.onAuthenticationSuccess(SavedRequestAwareAuthenticationSuccessHandler.java:80) [spring-security-web-5.2.1.RELEASE.jar:5.2.1.RELEASE]
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.successfulAuthentication(AbstractAuthenticationProcessingFilter.java:326) [spring-security-web-5.2.1.RELEASE.jar:5.2.1.RELEASE]
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:240) [spring-security-web-5.2.1.RELEASE.jar:5.2.1.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) [spring-security-web-5.2.1.RELEASE.jar:5.2.1.RELEASE]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:116) [spring-security-web-5.2.1.RELEASE.jar:5.2.1.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) [spring-security-web-5.2.1.RELEASE.jar:5.2.1.RELEASE]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:92) [spring-security-web-5.2.1.RELEASE.jar:5.2.1.RELEASE]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:77) [spring-security-web-5.2.1.RELEASE.jar:5.2.1.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) [spring-web-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) [spring-security-web-5.2.1.RELEASE.jar:5.2.1.RELEASE]
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:105) [spring-security-web-5.2.1.RELEASE.jar:5.2.1.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) [spring-security-web-5.2.1.RELEASE.jar:5.2.1.RELEASE]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:56) [spring-security-web-5.2.1.RELEASE.jar:5.2.1.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) [spring-web-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) [spring-security-web-5.2.1.RELEASE.jar:5.2.1.RELEASE]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:215) [spring-security-web-5.2.1.RELEASE.jar:5.2.1.RELEASE]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:178) [spring-security-web-5.2.1.RELEASE.jar:5.2.1.RELEASE]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:358) [spring-web-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:271) [spring-web-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) [spring-web-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) [spring-web-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) [spring-web-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) [spring-web-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) [spring-web-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) [spring-web-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:367) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:860) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1598) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source) [na:1.8.0_161]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) [na:1.8.0_161]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at java.lang.Thread.run(Unknown Source) [na:1.8.0_161]
+
+2020-03-15 17:01:21.685  INFO 20108 --- [http-nio-8070-exec-4] socialNetwork.services.LoggerService     : luci is listing users
+2020-03-15 17:03:49.155  INFO 20108 --- [http-nio-8070-exec-4] socialNetwork.services.LoggerService     : luci is listing requests
+2020-03-15 17:03:59.704  INFO 20108 --- [http-nio-8070-exec-2] socialNetwork.services.LoggerService     : luci is listing friends
+2020-03-15 17:04:02.254  INFO 20108 --- [http-nio-8070-exec-8] socialNetwork.services.LoggerService     : luci is listing posts
+2020-03-15 17:04:04.501  INFO 20108 --- [http-nio-8070-exec-5] socialNetwork.services.LoggerService     : luci is listing posts
+2020-03-15 17:04:07.734  INFO 20108 --- [http-nio-8070-exec-6] socialNetwork.services.LoggerService     : luci is listing requests
+2020-03-15 17:05:36.935  INFO 20108 --- [http-nio-8070-exec-6] socialNetwork.services.LoggerService     : luci is listing friends
+2020-03-15 17:08:52.546  INFO 20108 --- [http-nio-8070-exec-6] socialNetwork.services.LoggerService     : luci is listing posts
